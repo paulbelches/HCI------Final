@@ -1,0 +1,81 @@
+<ion-header class="bg-secondary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="bg-dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700 titulo4">Pregunta 1</ion-text>
+        </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="information-circle-outline" style="zoom:2.0;" tappable (click)="info()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-progress-bar color="primary" value="0.1"></ion-progress-bar>
+    <ion-progress-bar color="primary" value="0.1"></ion-progress-bar>
+    <ion-progress-bar color="primary" value="0.1"></ion-progress-bar>
+  </div>
+  
+  <div>
+    <ion-list class="bg-light" [lines]=lines>
+      <ion-radio-group [(ngModel)]="lines" (ionChange)="actualizarResp1()">
+
+        <ion-list-header>
+          <p text-center style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <ion-text color="dark">
+              <h1>¿Consumes frutas y verduras producidas en tu región?</h1>
+            </ion-text>
+          </p>
+        </ion-list-header>
+
+
+        <ion-item>
+          <ion-label><span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><p>Sí, y prefiero las que vienen sin<br>envasar.</p></span></ion-label>
+          <ion-radio name="lines" value=2></ion-radio>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label><span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><p>Sí, aunque a veces las compro<br>envasadas.</p></span></ion-label>
+          <ion-radio name="lines" value=10></ion-radio>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label><span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><p>No, compro productos de otras regiones que,<br>en muchas ocasiones, están envasados.</p></span></ion-label>
+          <ion-radio name="lines" value=20></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+
+  <div padding>
+    <img src="assets/img/frutasverduras.jpg" class="center"/>
+  </div>
+  
+
+  <div text-center>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="6">
+          <ion-button size="medium" shape="round" color="danger" (click)="goToBack()" tappable>
+            Regresar
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button size="medium" shape="round" color="success" (click)="goToNext2()" tappable>
+            Siguiente
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

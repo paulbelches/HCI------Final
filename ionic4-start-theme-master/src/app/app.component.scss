@@ -1,0 +1,16 @@
+:host {
+    ion-content {
+        --background: va(--ion-color-secondary);
+    }
+
+    ion-list {
+        &.list-md {
+            padding: 0;
+        }
+    }
+}
+
+.menuPage {
+    color: black;
+}
+

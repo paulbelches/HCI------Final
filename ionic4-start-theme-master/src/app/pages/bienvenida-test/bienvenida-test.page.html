@@ -1,0 +1,98 @@
+<ion-header class="bg-secondary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="bg-dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700 titulo5">Test de la huella de carbono</ion-text>
+        </ion-text>
+    </ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="information-circle-outline" style="zoom:2.0;" tappable (click)="info()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <p text-center style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      <ion-text color="dark">
+        <h1>Bienvenido al test de huella de carbono</h1>
+      </ion-text>
+    </p>
+    <div>
+      <ion-slides #mySlider pager="true" (ionSlidesDidLoad)="slideDidLoad(mySlider)">
+        <ion-slide>
+          <img src="assets/img/huellaCarbono2jpg.png">
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/img/huellaCarbono-1.png"/>
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/img/huella-carbono.png"/>
+        </ion-slide>
+      </ion-slides>
+      <br/>
+    </div>
+
+
+    <p text-center style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      <ion-text color="dark">
+        <h3>¿Qué es la Huella de Carbono?</h3>
+      </ion-text>
+    </p>
+    
+    <p class="text1 textos" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+        La huella de carbono es un indicador que permite conocer la totalidad de gases de efecto invernadero 
+        que produce cada persona para el planeta. La huella de carbono se conoce como "la totalidad de gases 
+        de efecto invernadero (GEI) emitidos por efecto directo o indirecto de un individuo u organización." <br><br>
+        
+        La huella de carbono se mide en masa de CO2 
+        equivalente, por lo cual una vez conocido el tamaño y la huella, es posible implementar una estrategia de reducción y/o 
+        compensación de emisiones, a través de la toma de nuevo habitos.
+    </p>
+
+    <br>
+
+    <p text-center style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      <ion-text color="dark">
+        <h3>¿Cuál es el propósito de este Test?</h3>
+      </ion-text>
+    </p>
+
+    <p class="text1 textos" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      A través de este test podremos determinar tu propia huella de carbono, basados en varios aspectos y actividades 
+      de tu vida diaria<br><br>
+
+      Este test consta de 9 preguntas las cuáles recabarán datos para poder determinar tu huella de carbono y la cantidad 
+      de planetas Tierra que se necesitarían para cubrir la demanda de recursos a nivel mundial si toda la población tuviera los mismos
+      habitos que tú.    
+    </p>
+    
+    <br>
+
+    <div text-center>
+      <ion-grid>
+        <ion-row>
+
+          <ion-col size="6">
+            <ion-button size="medium" shape="round" color="medium" (click)="goToMenu()" tappable>
+              Regresar
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button size="medium" shape="round" color="success" (click)="goToNext1()" tappable>
+              Iniciar test
+            </ion-button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    
+  </div> 
+
+</ion-content>

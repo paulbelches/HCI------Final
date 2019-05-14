@@ -1,0 +1,12 @@
+:host {
+    ion-content {
+        --background: var(--ion-color-light);
+    }
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 400;
+    width: 80vw;
+  }

@@ -1,0 +1,345 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+ion-item {
+    --ion-item-background: transparent;
+}
+
+@font-face {
+  font-family: Titulo;
+  src: url(./assets/fonts/KodinahDiary.ttf)
+}
+
+@font-face {
+  font-family: otroTitulo;
+  src: url(./assets/fonts/FredokaOne-Regular.ttf)
+}
+
+.titulo {
+  font-family: Titulo;
+  font-size: 450%;
+  color: #fdfdf6;
+}
+.titulo2 {
+  font-family: Titulo;
+  font-size: 250%;
+  color: #ffffff;
+}
+.titulo3 {
+  font-family: Titulo;
+  font-size: 200%;
+  color: #fdfdf6;
+}
+.titulo4 {
+  font-family: otroTitulo;
+  font-size: 150%;
+  color: #ffffff;
+}
+.titulo5 {
+  font-family: otroTitulo;
+  font-size: 100%;
+  color: #ffffff;
+}
+
+.textos {
+  text-align: justify;
+  color: black;
+}
+// backgrounds //
+
+  .colorButton {
+    background-color: #ff8b00;
+  }
+
+  .bg-button {
+    background-color: #444444;
+  }
+
+  .bg-button2 {
+    background-color: #5d5d5a;
+  }
+
+  .bg-card {
+    background-color: #fcf9f4;
+  }
+
+  .centro {
+    text-align: center;
+  } 
+
+  .mensajeError{
+    font-size: 10px;
+    color: red;
+  }
+
+  .espaciado {
+    margin: 15% 10% 5px 10%;
+  }
+  .espaciado2 {
+    margin: 10% 10% 10%;
+  }
+
+  .espaciado3 {
+    margin: 5% 30% 5% 30%;
+  }
+
+  .espaciado4 {
+    margin: 2% 35% 5px 35%;
+  }
+
+  .bg-white {
+    background-color: #feffdb;
+  }
+  
+  .bg-light {
+    background-color: var(--ion-color-light);
+  }
+  
+  .bg-dark {
+      background-color: var(--ion-color-dark);
+  }
+  
+  .bg-primary {
+      background-color: var(--ion-color-primary);
+  }
+  
+  .bg-secondary {
+      background-color: var(--ion-color-secondary);
+  }
+  
+  .bg-tertiary {
+      background-color: var(--ion-color-tertiary);
+  }
+  
+  .bg-profile {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .bg-profile2 {
+    background-color: #ffa45c;
+  }
+  
+  .bg-main {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .popUp {
+    text-align: justify;
+  }
+  
+  // Helpers //
+  .w100 {
+    width: 100%;
+  }
+  
+  .bold,
+  .fw500 {
+      font-weight: 500 !important;
+  }
+  
+  .fw700 {
+      font-weight: 700 !important;
+  }
+  
+  .text08 {
+    font-size: .8rem;
+  }
+  
+  .text1 {
+    font-size: 1rem !important;
+  }
+
+  .text12 {
+    font-size: 1.2rem;
+  }
+
+  .text15 {
+    font-size: 1.5rem;
+  }
+  
+  .text20 {
+    font-size: 2rem;
+  }
+  
+  .text-white {
+      color: #fff;
+  }
+  
+  .text-primary {
+      color: var(--ion-color-primary);
+  }
+
+  .text-secondary {
+    color: var(--ion-color-secondary);
+}
+  
+  .text-dark {
+    color: var(--ion-color-dark);
+  }
+
+  .white{
+    color: white;
+  }
+  
+  // menu //
+  // Menu user profile
+
+  .image-button{
+    height: 50%;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .image-button2{
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .image-button3{
+    height: 30px;
+    width: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .round {
+    border-radius: 50%;
+  }
+
+  
+
+  .btn{
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    cursor: pointer;
+  }
+
+  .otherBtn{
+    border-color: #4CAF50;
+    color: green;
+  }
+
+  .otherBtn:hover{
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  // Custom toolbar (overriding Shadow DOM)
+  ion-toolbar {
+    &.ion-color-primary {
+      --ion-color-base: --ion-color-secondary !important;
+    }
+  }
+  
+  // Android card shadow
+  ion-card {
+    &.sc-ion-card-md-h {
+      box-shadow: 0 2px 4px rgba(var(--ion-color-dark-rgb),.24);
+    }
+  }
+  
+  // style for auth pages
+  .auth-page {
+    background-color: var(--ion-color-secondary);
+  
+    .grid {
+      padding: 0;
+      .col {
+        padding: 0;
+      }
+    }
+  
+    .btn-group {
+      .button-ios,
+      .button-md {
+        border-radius: 0;
+        &:first-of-type {
+          border-radius: 2px 0 0 2px;
+        }
+        &:last-of-type {
+          border-radius: 0 2px 2px 0;
+        }
+      }
+    }
+  
+    .auth-content {
+      margin: 0 5%;
+  
+      .logo {
+        width: 60px;
+        height: 60px;
+        margin: 20px auto 8px;
+        border-radius: 10%;
+        background: url("/assets/img/ionic4start-ico.png") no-repeat;
+        background-size: 100%;
+
+      }
+  
+      .list-form {
+        padding: 0;
+        margin-bottom: 0;
+  
+        ion-item {
+          background: none;
+          padding: 0;
+  
+          &:first-child {
+            border-top: none;
+          }
+  
+          &:after {
+            display: none;
+          }
+  
+          ion-label {
+            font-size: 1em;
+            color: var(--ion-color-light);
+          }
+  
+          input {
+            color: var(--ion-color-light);
+          }
+        }
+      }
+    }
+  
+  }
+  
+  // Custom Menu styles (overriding Shadow DOM)
+  ion-menu {
+    ion-header {
+      ion-toolbar {
+        &.ion-color-dark {
+          --ion-color-base: var(--ion-color-menu) !important;
+        }
+      }
+    }
+  }
+  
+  .mto {
+    margin-top: 12px;
+    ion-icon {
+      margin-bottom: -2px;
+    }
+  }
+
+  .menu{
+    color: white;
+    font-size: 1rem;
+  }

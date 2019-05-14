@@ -1,0 +1,50 @@
+<ion-header class="bg-secondary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="bg-dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700 titulo4">Cálculo energético<br></ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="title">
+    <h1>Resultados</h1>
+  </div>
+
+  <div class="information">
+    <h4>Tu consumo total es de:</h4>
+
+    <ion-card class="bg-card espaciado3 data">
+      <h4>{{this.datos}} kWh</h4>
+    </ion-card>
+    
+
+    <h4>Necesitarías un panel solar con Potencia eléctrica de:</h4>
+    <ion-card class="bg-card espaciado3 data">
+      <h4>{{this.potenciaE}} Wp</h4>
+    </ion-card>
+
+    <h4>¿Cuántos páneles solares stándar necesitarías para satisfaces tu potencia eléctrica?</h4>
+    <ion-card class="bg-card espaciado3 data">
+      <h4>{{this.cantPanel}} páneles.</h4>
+    </ion-card>
+  </div>
+  
+  <div class="title">
+    <ion-button size="medium" shape="round" color="success" (click)='goToMenu()' tappable>
+      Regresar al menú
+    </ion-button>      
+  </div>
+  
+</ion-content>
+
+
+
+
+

@@ -1,0 +1,73 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h4 no-margin>
+        <ion-text color="light" class="fw700 titulo">
+          Solars
+          <br>
+        </ion-text>
+      </h4>
+    </div>
+
+    <br>
+    <!-- Login form -->
+    <form [formGroup]="onLoginForm" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Correo:
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+        <ion-text color="warning">
+          Campo necesario
+        </ion-text>
+      </p>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Contraseña:
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password" [(ngModel)]="password" ></ion-input>
+      </ion-item>
+      <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
+        <ion-text color="warning">
+          Campo necesario
+        </ion-text>
+        </p>
+    </form>
+
+    <p text-right tappable (click)="forgotPass()" class="paz">
+      <ion-text color="light">
+        <strong>¿Olvidaste la Contraseña?</strong>
+      </ion-text>
+    </p>
+
+    <br>
+    <div>
+      
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="login()" [disabled]="!onLoginForm.valid" tappable>
+        <!-- (click)="goToHome()" -->
+
+        <ion-icon name="log-in"></ion-icon>
+        Acceder
+      </ion-button>
+    </div>
+
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span (click)="goToRegister()" class="paz" tappable>
+        <ion-text color="light">
+          ¿Nuevo? <strong>Registrarse</strong>
+        </ion-text>
+      </span>
+    </div>
+
+  </div>
+</ion-content>

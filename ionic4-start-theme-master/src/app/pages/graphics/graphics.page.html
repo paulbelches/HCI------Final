@@ -1,0 +1,39 @@
+<ion-header class="bg-secondary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700 titulo4">Gráficas</ion-text>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p text-center style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <ion-text color="dark">
+      <h1>Historial de resultados</h1>
+    </ion-text>
+  </p>
+
+  <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <ion-text color="dark">
+      <h4>Cantidad de planetas Tierra</h4>
+    </ion-text>
+  </p>
+  <div class="chart-container">
+    <canvas #earth height="400px"></canvas>
+  </div>
+
+  <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <ion-text color="dark">
+      <h4>Cantidad de páneles solares</h4>
+    </ion-text>
+  </p>
+  <div class="chart-container">
+    <canvas #panel height="400px"></canvas>
+  </div>
+</ion-content>
