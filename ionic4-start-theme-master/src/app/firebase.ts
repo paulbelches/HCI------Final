@@ -1,10 +1,11 @@
 const config = {
-    apiKey: "AIzaSyCVlcz1KPt4nrMlZU2FPG72n2hxcrEyjEM",
-    authDomain: "ods11-27cb6.firebaseapp.com",
-    databaseURL: "https://ods11-27cb6.firebaseio.com",
-    projectId: "ods11-27cb6",
-    storageBucket: "ods11-27cb6.appspot.com",
-    messagingSenderId: "650290967312"
+    apiKey: "AIzaSyBIB4n4p0gmfrGZD95m4lwSd4k-FHKCXSI",
+    authDomain: "hci-final-3f671.firebaseapp.com",
+    databaseURL: "https://hci-final-3f671.firebaseio.com",
+    projectId: "hci-final-3f671",
+    storageBucket: "hci-final-3f671.appspot.com",
+    messagingSenderId: "1098922505842",
+    appId: "1:650290967312:web:1a7b6f0227b04b95"
   }
 
 export default config
