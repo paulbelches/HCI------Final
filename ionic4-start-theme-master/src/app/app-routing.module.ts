@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: 'testhuellaresultado/:myid37/:myid38/:myid39/:myid40/:myid41/:myid42/:myid43/:myid44/:myid45', loadChildren: './pages/testhuellaresultado/testhuellaresultado.module#TesthuellaresultadoPageModule' },
   { path: 'calculate-enery/:myLista', loadChildren: './pages/calculate-enery/calculate-enery.module#CalculateEneryPageModule' },
   { path: 'graphics', loadChildren: './pages/graphics/graphics.module#GraphicsPageModule' },
-
+  { path: 'alarma', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
 
 ];
 

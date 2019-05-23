@@ -33,23 +33,53 @@ export class AppComponent {
         icon: 'home'
       },
       {
-        title: 'Acerca de Solars',
+        title: 'Ruta Manual',
+        url: '/settings',
+        direct: 'forward',
+        icon: 'globe'
+      },
+      {
+        title: 'NFC',
+        url: '/graphics',
+        direct: 'forward',
+        icon: 'wifi'
+      },
+      {
+        title: 'Favoritos',
+        url: '/help',
+        direct: 'forward',
+        icon: 'star'
+      },
+      {
+        title: 'Perfil',
+        url: '/help',
+        direct: 'forward',
+        icon: 'person'
+      },
+      {
+        title: 'Configuración',
+        url: '/help',
+        direct: 'forward',
+        icon: 'settings'
+      },
+      {
+        title: 'Alarma Actual',
+        url: '/alarma',
+        direct: 'forward',
+        icon: 'alarm'
+      },
+      {
+        title: 'Acerca de GeoWakeUp',
         url: '/about',
         direct: 'forward',
         icon: 'information-circle-outline'
       },
 
       {
-        title: 'Propósito de Solars',
-        url: '/settings',
+        title: 'Ayuda',
+        url: '/help',
         direct: 'forward',
-        icon: 'globe'
-      },
-      {
-        title: 'Estadísticas',
-        url: '/graphics',
-        direct: 'forward',
-        icon: 'stats'
+        icon: 'help'
       }
     ];
 
