@@ -21,6 +21,7 @@ export class MenuPrincipalPage implements OnInit {
   mapRef = null;
   overlay = null;
   marker: any;
+  myLatLng: any;
 
   // @ViewChild('map') mapElement: ElementRef;
 
@@ -37,26 +38,27 @@ export class MenuPrincipalPage implements OnInit {
   }
 
   async loadMap(){
-    const loading = await this.loadCtrl.create();
-    loading.present();
 
-    const myLatLng = await this.getLocation();
+    this.myLatLng = await this.getLocation();
 
-    console.log(myLatLng);
+    this.presentToast(this.myLatLng.lat + " <=> " + this.myLatLng.lng);
+
+    // const loading = await this.loadCtrl.create();
+    // loading.present();
      
     const mapEle: HTMLElement = document.getElementById('map');
 
     this.mapRef  = new google.maps.Map(mapEle, {
-      center: myLatLng,
+      center: this.myLatLng,
       zoom: 12
     });
 
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
       console.log('added');
-      loading.dismiss();
+      // loading.dismiss();
 
-      this.addMarker(myLatLng.lat, myLatLng.lng);
+      this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
     })
 
     google.maps.event
@@ -64,14 +66,12 @@ export class MenuPrincipalPage implements OnInit {
       console.log("Hiciste clic en mapa");
     })
 
-
-
     let options: NativeGeocoderOptions = {
       useLocale: true,
       maxResults: 5
     };
   
-    this.nativeGeocoder.reverseGeocode(myLatLng.lat, myLatLng.lng, options)
+    this.nativeGeocoder.reverseGeocode(this.myLatLng.lat, this.myLatLng.lng, options)
       .then((result: NativeGeocoderResult[]) => this.presentToast(JSON.stringify(result[0])))
       .catch((error: any) => this.presentToast(error));
     
@@ -105,5 +105,8 @@ export class MenuPrincipalPage implements OnInit {
     }
   }
 
+  showLocation(){
+    this.presentToast(this.myLatLng.lat + " <=> " + this.myLatLng.lng);
+  }
 
 }
