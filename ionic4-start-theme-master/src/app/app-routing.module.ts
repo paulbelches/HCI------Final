@@ -26,7 +26,6 @@ const routes: Routes = [
   { path: 'graphics', loadChildren: './pages/graphics/graphics.module#GraphicsPageModule' },
   { path: 'alarma', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
-
 ];
 
 @NgModule({
