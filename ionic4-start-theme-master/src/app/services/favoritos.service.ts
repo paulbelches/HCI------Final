@@ -37,4 +37,18 @@ export class FavoritosService {
   getFavorites() {
     return this.favoritos;
   }
+
+  getFav(id:string): Observable<Favorito> {
+    return this.favCollection.doc<Favorito>(id).valueChanges().pipe(
+      take(1),
+      map(favorito => {
+        favorito.id = id;
+        return favorito;
+      })
+    );
+  }
+
+  removeFavorite(id): Promise<void> {
+    return this.favCollection.doc(id).delete();
+  }
 }

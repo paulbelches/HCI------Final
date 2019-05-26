@@ -19,21 +19,34 @@ export class FavoritosPage implements OnInit {
   constructor(
     public FavoritosService: FavoritosService
 
-  ) {
+  ) {}
 
+  ngOnInit() {
     this.favs = this.FavoritosService.getFavorites();
 
     this.favs.forEach(element => {
       element.forEach(item => {
-        var obj: {title: string, value : number} =
-        { title : item.id, value : item.value };
+        var obj: { title: string, value: number } = { title: item.id, value: item.value };
         this.cardItems.push(obj);
       })
     });
 
   }
 
-  ngOnInit() {
+  removeFavorite(favTitle){
+
+    console.log(favTitle);
+
+    this.favs.forEach(element => {
+      element.forEach(item => {
+        console.log(item.title);
+        if (item.title == favTitle){
+          console.log("Eliminando....");
+          this.FavoritosService.removeFavorite(item.id);
+        }
+      })
+    });
+
   }
 
 }
