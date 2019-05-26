@@ -15,6 +15,7 @@ var service;
 var directionsService;
 var directionsDisplay;
 var miArray: number[];
+var fallo: boolean;
 
 @Component({
   selector: 'app-menu-principal',
@@ -28,7 +29,8 @@ export class MenuPrincipalPage implements OnInit {
   marker: any;
   markers = [];
   myLatLng: any;
-  lugar: any;
+  lugar = "";
+  siguiente = false;
 
   constructor(
     private geolocation: Geolocation,
@@ -148,18 +150,23 @@ export class MenuPrincipalPage implements OnInit {
   }
 
   calculateAndDisplayRoute(){
-    this.deleteLastMarker();
-
     directionsService.route({
       origin: this.myLatLng,
       destination: this.lugar,
       travelMode: 'DRIVING'
     }, function(response, status) {
       if(status === 'OK'){
+        fallo = false;
         directionsDisplay.setDirections(response);
       }else{
+        fallo = true;
         window.alert("Direccion fallo.");
       }
     });
+
+    if(!fallo){
+      this.deleteLastMarker();
+      this.siguiente = true;
+    }
   }
 }
