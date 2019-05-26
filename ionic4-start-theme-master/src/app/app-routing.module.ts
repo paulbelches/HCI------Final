@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'graphics', loadChildren: './pages/graphics/graphics.module#GraphicsPageModule' },
   { path: 'alarma/:latOri/:lngOri/:latDest/:lngDest/:lugar', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
-  { path: 'menu-principal', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
+  { path: 'menu-principal/:tipo/:lugar', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
 ];

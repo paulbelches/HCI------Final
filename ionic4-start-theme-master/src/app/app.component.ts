@@ -28,7 +28,7 @@ export class AppComponent {
     this.appPages = [
       {
         title: 'Menú principal',
-        url: '/home-results',
+        url: '/menu-principal/otro/0',
         direct: 'root',
         icon: 'home'
       },
