@@ -8,6 +8,8 @@ export interface Favorito{
   id?: string;
   title : string;
   value: number;
+  lat: number;
+  lng: number;
 }
 
 @Injectable({
@@ -49,6 +51,7 @@ export class FavoritosService {
   }
 
   removeFavorite(id): Promise<void> {
+    console.log("Se ejecutó el método para eliminar", id);
     return this.favCollection.doc(id).delete();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
 import { Favorito, FavoritosService } from 'src/app/services/favoritos.service';
+import { LoadingController, NavController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,10 +14,12 @@ export class FavoritosPage implements OnInit {
   public cardItems = [];
 
   favs: Observable<Favorito[]>;
+  prueba: Observable<Favorito[]>;
 
 
   constructor(
-    public FavoritosService: FavoritosService
+    public FavoritosService: FavoritosService,
+    public navCtrl: NavController
 
   ) {}
 
@@ -26,7 +28,8 @@ export class FavoritosPage implements OnInit {
 
     this.favs.forEach(element => {
       element.forEach(item => {
-        var obj: { title: string, value: number } = { title: item.id, value: item.value };
+        var obj: { title: string, value: number, lat: number, lng: number } =
+        { title: item.id, value: item.value, lat: item.lat, lng: item.lng };
         this.cardItems.push(obj);
       })
     });
@@ -35,18 +38,21 @@ export class FavoritosPage implements OnInit {
 
   removeFavorite(favTitle){
 
-    console.log(favTitle);
-
     this.favs.forEach(element => {
       element.forEach(item => {
-        console.log(item.title);
+        console.log(item.id);
         if (item.title == favTitle){
-          console.log("Eliminando....");
+          console.log("Eliminando....", item.id);
           this.FavoritosService.removeFavorite(item.id);
         }
       })
     });
 
+  }
+
+  pushAlarm(favTitle) {
+
+    this.navCtrl.navigateForward('/menu-principal/' + '-90' + '/' + '14.002' + '/' + 'UVG');
   }
 
 }
