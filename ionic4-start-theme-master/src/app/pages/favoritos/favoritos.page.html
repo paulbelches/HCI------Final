@@ -1,0 +1,49 @@
+<ion-header class="bg-secondary">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700 titulo4">Favoritos</ion-text>
+            </ion-text>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="ion-text-center">
+        <h1 margin-bottom>
+            <ion-text color="primary"><strong>Destinos Favoritos</strong></ion-text>
+        </h1>
+    </div>
+
+    <br>
+
+    <div id="fav-cards">
+
+        <ion-card *ngFor="let item of cardItems; let i = index">
+            <ion-card-header>
+                <ion-card-title>{{item.title}}</ion-card-title>
+                <ion-card-subtitle>Utilizado: {{item.value}} veces</ion-card-subtitle>
+            </ion-card-header>
+
+            <div class="card-buttons" id="{{'card-'+i}}">
+                <ion-card-content>
+                    <ion-button>
+                        <ion-icon slot="start" name="alarm"></ion-icon>
+                        Activar
+                    </ion-button>
+                    <ion-button (click)="removeFavorite(item.title)">
+                        <ion-icon slot="start" name="trash"></ion-icon>
+                        Eliminar
+                    </ion-button>
+                </ion-card-content>
+            </div>
+        </ion-card>
+
+        <br>
+
+    </div>
+
+</ion-content>
