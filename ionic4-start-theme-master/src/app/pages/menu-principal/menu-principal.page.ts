@@ -52,17 +52,20 @@ export class MenuPrincipalPage implements OnInit {
       this.personas.subscribe(
         element => {
           element.forEach(elment => {
+            // console.log("elemento:")
             // console.log(elment);
             if(elment.email == this.global.email){
-              this.saveName(elment.nombre.toString());
+              this.saveName(elment.nombre.toString(), elment.id);
             }
           })
         }
       )
   }
 
-  saveName(nombre: string){
+  saveName(nombre: string, id: string){
     this.global.nombre = nombre;
+    this.global.idDoc = id;
+    console.log(this.global.idDoc);
   }
 
   ngOnInit(){
