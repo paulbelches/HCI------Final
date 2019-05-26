@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { ToastController } from '@ionic/angular';
 
@@ -31,12 +31,17 @@ export class MenuPrincipalPage implements OnInit {
   myLatLng: any;
   lugar = "";
   siguiente = false;
+  latDest: number;
+  lngDest: number;
+  latOri: number;
+  lngOri: number;
 
   constructor(
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
     private nativeGeocoder: NativeGeocoder,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public navCtrl: NavController
     ) {
   }
 
@@ -63,7 +68,7 @@ export class MenuPrincipalPage implements OnInit {
 
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
-      console.log('added');
+      // console.log('added');
       // loading.dismiss();
       this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
     });
@@ -86,10 +91,13 @@ export class MenuPrincipalPage implements OnInit {
     });
 
     this.markers.push(this.marker);
+
   }
 
   private async getLocation(){
     const rta = await this.geolocation.getCurrentPosition()
+    this.latOri = rta.coords.latitude;
+    this.lngOri = rta.coords.longitude;
     return {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude
@@ -104,7 +112,7 @@ export class MenuPrincipalPage implements OnInit {
     var searchLat=0;
     var searchLong=0;
 
-    console.log(this.lugar);
+    // console.log(this.lugar);
 
     //Comienza
     var request = {
@@ -128,17 +136,19 @@ export class MenuPrincipalPage implements OnInit {
     });
 
     promiseSearch.then(function(fromResolve){
-      console.log(fromResolve);
+      // console.log(fromResolve);
       miArray = [];
       miArray.push(fromResolve[0], fromResolve[1]);
     }).then(() => {
-      console.log(this.markers.length);
+      // console.log(this.markers.length);
       if(this.markers.length > 1){
         this.deleteLastMarker();
       }
     }).then(() => {
-      console.log("Mi array: " + miArray);
-      this.addMarker(miArray[1], miArray[0]);
+      // console.log("Mi array: " + miArray);
+      // this.addMarker(miArray[1], miArray[0]);
+      this.latDest = miArray[1];
+      this.lngDest = miArray[0];
     });
   }
 
@@ -166,7 +176,12 @@ export class MenuPrincipalPage implements OnInit {
 
     if(!fallo){
       this.deleteLastMarker();
+      this.setUbicacion();
       this.siguiente = true;
     }
+  }
+
+  pushPage(){
+    this.navCtrl.navigateForward('/alarma/' + this.latOri + '/' + this.lngOri + '/' + this.latDest + '/' + this.lngDest + '/' + this.lugar);
   }
 }

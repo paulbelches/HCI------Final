@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alarma',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlarmaPage implements OnInit 
 {
+
+  latOri = null;
+  lngOri = null;
+  latDest = null;
+  lngDest = null;
+  lugar = null;
+
   passedVar=null;
-  constructor() 
+  constructor(private activateRoute: ActivatedRoute) 
   {
     this.timerTick();
     
@@ -30,6 +38,18 @@ export class AlarmaPage implements OnInit
    
 
   ngOnInit() {
+    this.latOri = this.activateRoute.snapshot.paramMap.get('latOri');
+    this.lngOri = this.activateRoute.snapshot.paramMap.get('lngOri');
+    this.latDest = this.activateRoute.snapshot.paramMap.get('latDest');
+    this.lngDest = this.activateRoute.snapshot.paramMap.get('lngDest');
+    this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
+
+    console.log(this.latOri);
+    console.log(this.lngOri);
+    console.log(this.latDest);
+    console.log(this.lngDest);
+    console.log(this.lugar);
+
   }
 
 }

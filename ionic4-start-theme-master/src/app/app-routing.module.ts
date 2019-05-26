@@ -9,8 +9,9 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'graphics', loadChildren: './pages/graphics/graphics.module#GraphicsPageModule' },
-  { path: 'alarma', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
+  { path: 'alarma/:latOri/:lngOri/:latDest/:lngDest/:lugar', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
+  { path: 'menu-principal', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
 ];
 
 @NgModule({
