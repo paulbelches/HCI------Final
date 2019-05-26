@@ -62,13 +62,36 @@ export class AlarmaPage implements OnInit
 
    }
 
-   timerTick()
+   private async getLocation(){
+    const rta = await this.geolocation.getCurrentPosition()
+    this.latOri = rta.coords.latitude;
+    this.lngOri = rta.coords.longitude;
+    return {
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude
+    }
+  }
+
+  async getPorcentaje()
+  {
+    var x = await this.getLocation();
+    this.getDistancia(x.lat,x.lng,this.latDest,this.lngDest);
+    var porcentaje=(localStorage['distanciaTotal'] - localStorage['distanciaNum']) / localStorage['distanciaTotal'];
+    this.passedVar=porcentaje;
+    
+        
+  }
+  
+  timerTick()
    {
      
     setTimeout( () => {
-      this.passedVar+=0.1
       this.tiempo=localStorage['tiempo'];
       this.distancia=localStorage['distancia'];
+      this.getPorcentaje();
+
+
+      
       
   
             
@@ -81,6 +104,36 @@ export class AlarmaPage implements OnInit
      console.log(parametro);
 
    }
+
+   getDistancia(latOrigen,lngOrigen,latDest,lngDest)
+  { 
+    var origin = {lat: latOrigen, lng: lngOrigen};
+    var destination = {lat: latDest, lng: lngDest};
+    var geocoder = new google.maps.Geocoder;
+    var service = new google.maps.DistanceMatrixService;
+        service.getDistanceMatrix({
+          origins: [origin],
+          destinations:  [destination],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false
+        },function(response, status) {
+          if (status !== 'OK') {
+            alert('Error was: ' + status);
+          } else {
+            
+              var results = response.rows[0].elements;   
+              var distancia=results[0].distance.value;
+              localStorage['distanciaNum']=distancia;
+                            
+              
+          }
+        });
+
+        
+       
+  }
 
   getTimeAndDist(latOrigen,lngOrigen,latDest,lngDest)
   { 
@@ -106,7 +159,9 @@ export class AlarmaPage implements OnInit
               console.log(tiempo);
               console.log(distancia);
               localStorage['tiempo']=tiempo;
-              localStorage['distancia']=distancia;              
+              localStorage['distancia']=distancia;        
+              var distancia=results[0].distance.value;
+              localStorage['distanciaTotal']=distancia;      
               
           }
         });
