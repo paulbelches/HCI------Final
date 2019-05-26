@@ -1,28 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>alarma</ion-title>
+    <ion-title>Alarma</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content padding>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="star" *ngIf="controlFav"></ion-icon>
+            <ion-icon name="star-outline" *ngIf="!controlFav"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+
 
     <ion-item>
         <ion-label>
-          <b>Destino: </b> Universidad del Valle de G.
+          <b>Destino: </b> {{lugar}}
         </ion-label>
       </ion-item>
 
       <ion-item>
           <ion-label>
-            <b>Tiempo de llegada estimado: </b> 35 min.
+            <b>Tiempo de llegada estimado: </b>{{tiempo}}
           </ion-label>
         </ion-item>
 
+        <ion-item>
+            <ion-label>
+              <b>Distancia a recorrer: </b>{{distancia}}
+            </ion-label>
+          </ion-item>
+
+         
 <h1 text-center> 
   <ion-text >Datos de la alarma en progreso</ion-text>
   <ion-text >{{passedVar}}</ion-text>
 </h1>
 <br><br><br><br>
+
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="11">
+                <ion-icon name="man"></ion-icon> 
+            </ion-col>          
+
+            <ion-col size="1">
+                <ion-icon name="locate"></ion-icon>
+              </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
     <ion-progress-bar color="primary" value={{passedVar}}></ion-progress-bar>
 
 </ion-content>
