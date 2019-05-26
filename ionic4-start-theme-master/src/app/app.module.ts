@@ -13,10 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+// import { GoogleMaps, Geocoder } from '@ionic-native/google-maps';
 
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
-
 
 //firebase
 import firebaseConfig from './firebase'
@@ -25,6 +25,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule, DefaultFirestoreSettings, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { GlobalService } from './services/global.service';
 import { from } from 'rxjs';
+
+// import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
@@ -50,6 +52,8 @@ import { from } from 'rxjs';
     GlobalService,
     Geolocation,
     NativeGeocoder
+    // GoogleMaps,
+    // Geocoder
   ],
   bootstrap: [AppComponent]
 })
