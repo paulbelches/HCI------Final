@@ -1,0 +1,22 @@
+{
+    "places": [
+        {
+            "country": "Guatemala",
+            "name": "Oakland Mall",
+            "latitude": 14.59891,
+            "longitude": -90.507138
+        },
+        {
+            "country": "Guatemala",
+            "name": "Universidad del Valle",
+            "latitude": 14.6053878,
+            "longitude": -90.4883017
+        },
+        {
+            "country": "Guatemala",
+            "name": "Ciudad Cayalá",
+            "latitude": 14.610620,
+            "longitude": -90.485898
+        }
+    ]
+}

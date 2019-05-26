@@ -134,7 +134,7 @@ export class LoginPage implements OnInit {
     const {username, password} = this
     try {
       const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password)
-      this.navCtrl.navigateRoot('/home-results/');
+      this.navCtrl.navigateRoot('/menu-principal/');
       this.pushPage();
     } catch(err) {
       this.showError(err);
@@ -152,7 +152,7 @@ export class LoginPage implements OnInit {
   }
   pushPage(){
     this.global.email = this.username;
-    this.navCtrl.navigateForward('/home-results/' + this.username);
+    this.navCtrl.navigateForward('/menu-principal');
 
   }
 
