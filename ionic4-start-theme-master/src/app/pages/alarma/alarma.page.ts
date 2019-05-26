@@ -5,9 +5,29 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './alarma.page.html',
   styleUrls: ['./alarma.page.scss'],
 })
-export class AlarmaPage implements OnInit {
+export class AlarmaPage implements OnInit 
+{
+  passedVar=null;
+  constructor() 
+  {
+    this.timerTick();
+    
+    
+    
 
-  constructor() { }
+   }
+
+   timerTick()
+   {
+     
+    setTimeout( () => {
+      this.passedVar+=0.1
+        this.timerTick();
+    }, 1000);
+
+   }
+
+   
 
   ngOnInit() {
   }
