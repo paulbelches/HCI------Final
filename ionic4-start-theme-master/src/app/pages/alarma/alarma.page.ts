@@ -77,7 +77,17 @@ export class AlarmaPage implements OnInit
     var x = await this.getLocation();
     this.getDistancia(x.lat,x.lng,this.latDest,this.lngDest);
     var porcentaje=(localStorage['distanciaTotal'] - localStorage['distanciaNum']) / localStorage['distanciaTotal'];
-    this.passedVar=porcentaje;
+    if(porcentaje<0)
+    {
+      this.passedVar=0;
+
+    }
+    else
+    {
+      this.passedVar=porcentaje;
+
+    }
+    
     
         
   }
@@ -89,13 +99,7 @@ export class AlarmaPage implements OnInit
       this.tiempo=localStorage['tiempo'];
       this.distancia=localStorage['distancia'];
       this.getPorcentaje();
-
-
-      
-      
-  
-            
-        this.timerTick();
+      this.timerTick();
     }, 1000);
    }
 
