@@ -1,13 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, AlertController } from '@ionic/angular';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { ToastController } from '@ionic/angular';
-
-// import { GoogleMaps, GoogleMap } from '@ionic-native/google-maps';
-
-// import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
-// import { NavController } from '@ionic/angular';
+import { GlobalService } from '../../services/global.service';
+import { persona, PersonasService } from '../../services/persona.service';
+import { Observable } from 'rxjs';
 
 declare var google;
 var map;
@@ -24,6 +22,8 @@ var fallo: boolean;
 })
 export class MenuPrincipalPage implements OnInit {
 
+  personas : Observable<persona[]>;
+
   mapRef = null;
   overlay = null;
   marker: any;
@@ -39,24 +39,48 @@ export class MenuPrincipalPage implements OnInit {
   constructor(
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
-    private nativeGeocoder: NativeGeocoder,
     public toastController: ToastController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private global: GlobalService,
+    private PersonasService: PersonasService,
+    public alertCtrl: AlertController,
     ) {
+      console.log("Correoooo: " + this.global.email);
+
+      this.personas = this.PersonasService.getpersonas();
+
+      this.personas.subscribe(
+        element => {
+          element.forEach(elment => {
+            // console.log(elment);
+            if(elment.email == this.global.email){
+              this.saveName(elment.nombre.toString());
+            }
+          })
+        }
+      )
+  }
+
+  saveName(nombre: string){
+    this.global.nombre = nombre;
   }
 
   ngOnInit(){
+    
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     this.loadMap();
   }
 
-  async loadMap()
-  {
+  ionViewWillEnter() {
+    
+  }
+
+  async loadMap(){
     this.myLatLng = await this.getLocation();
 
-    // const loading = await this.loadCtrl.create();
-    // loading.present();
+    const loading = await this.loadCtrl.create();
+    loading.present();
 
     this.mapRef  = new google.maps.Map(document.getElementById('map'), {
       center: this.myLatLng,
@@ -68,8 +92,7 @@ export class MenuPrincipalPage implements OnInit {
 
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
-      // console.log('added');
-      // loading.dismiss();
+      loading.dismiss();
       this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
     });
   }
@@ -112,9 +135,6 @@ export class MenuPrincipalPage implements OnInit {
     var searchLat=0;
     var searchLong=0;
 
-    // console.log(this.lugar);
-
-    //Comienza
     var request = {
       query: this.lugar,
       fields: ['name', 'geometry'],
@@ -136,17 +156,13 @@ export class MenuPrincipalPage implements OnInit {
     });
 
     promiseSearch.then(function(fromResolve){
-      // console.log(fromResolve);
       miArray = [];
       miArray.push(fromResolve[0], fromResolve[1]);
     }).then(() => {
-      // console.log(this.markers.length);
       if(this.markers.length > 1){
         this.deleteLastMarker();
       }
     }).then(() => {
-      // console.log("Mi array: " + miArray);
-      // this.addMarker(miArray[1], miArray[0]);
       this.latDest = miArray[1];
       this.lngDest = miArray[0];
     });
@@ -170,7 +186,6 @@ export class MenuPrincipalPage implements OnInit {
         directionsDisplay.setDirections(response);
       }else{
         fallo = true;
-        window.alert("Direccion fallo.");
       }
     });
 
@@ -178,10 +193,34 @@ export class MenuPrincipalPage implements OnInit {
       this.deleteLastMarker();
       this.setUbicacion();
       this.siguiente = true;
+    }else{
+      this.errorMensaje();
     }
   }
 
   pushPage(){
     this.navCtrl.navigateForward('/alarma/' + this.latOri + '/' + this.lngOri + '/' + this.latDest + '/' + this.lngDest + '/' + this.lugar);
+  }
+
+  async errorMensaje(){
+    const alert = await this.alertCtrl.create({
+      header: 'Error',
+      message: 'No se ha podido encontrar la dirección ingresada.',
+      buttons: ['OK'],
+      cssClass: 'popUp'
+    });
+
+    await alert.present();
+  }
+
+  async ayuda() {
+    const alert = await this.alertCtrl.create({
+      header: 'Ayuda',
+      message: '1. En primer lugar, debes ingresar la dirección a la que deseas dirigirte.<br>2. Luego, debes presionar el buton "Ubicar" para verificar la existencia de la dirección ingresada.<br>3. Finalmente, debes presionar en "Nueva alarma" para encontrar el tiempo estimado y la distancia a recorrer.',
+      buttons: ['OK'],
+      cssClass: 'popUp'
+    });
+
+    await alert.present();
   }
 }

@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
     this.personas.subscribe(
       element => {
         element.forEach(elment => {
+          // console.log(elment);
           if(elment.email == this.global.email){
             this.saveName(elment.nombre.toString());
           }
@@ -150,10 +151,10 @@ export class LoginPage implements OnInit {
       .then(() => loading.dismiss())
       .catch((error) => this.showError(error)) 
   }
+
   pushPage(){
     this.global.email = this.username;
     this.navCtrl.navigateForward('/menu-principal');
-
   }
 
   async showError(error){

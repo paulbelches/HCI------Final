@@ -52,7 +52,7 @@ export class AppComponent {
       },
       {
         title: 'Perfil',
-        url: '/help',
+        url: '/perfil',
         direct: 'forward',
         icon: 'person'
       },
