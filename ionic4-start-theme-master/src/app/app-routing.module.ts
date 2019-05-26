@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: 'calculate-enery/:myLista', loadChildren: './pages/calculate-enery/calculate-enery.module#CalculateEneryPageModule' },
   { path: 'graphics', loadChildren: './pages/graphics/graphics.module#GraphicsPageModule' },
   { path: 'alarma', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
-  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+
 ];
 
 @NgModule({
