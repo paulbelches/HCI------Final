@@ -14,6 +14,7 @@ var directionsService;
 var directionsDisplay;
 var miArray: number[];
 var fallo: boolean;
+var nombreLugar;
 
 @Component({
   selector: 'app-menu-principal',
@@ -148,6 +149,7 @@ export class MenuPrincipalPage implements OnInit {
       service.findPlaceFromQuery(request,function(results, status) {
 
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+            nombreLugar=results[0].name;
             searchLat = <number> results[0].geometry.viewport.ia.j;
             searchLong = <number> results[0].geometry.viewport.na.l;
 
@@ -202,7 +204,7 @@ export class MenuPrincipalPage implements OnInit {
   }
 
   pushPage(){
-    this.navCtrl.navigateForward('/alarma/' + this.latOri + '/' + this.lngOri + '/' + this.latDest + '/' + this.lngDest + '/' + this.lugar);
+    this.navCtrl.navigateForward('/alarma/' + this.latOri + '/' + this.lngOri + '/' + this.latDest + '/' + this.lngDest + '/' + nombreLugar);
   }
 
   async errorMensaje(){
