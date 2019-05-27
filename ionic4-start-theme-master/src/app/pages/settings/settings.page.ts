@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { GlobalService } from '../../services/global.service';
 import { conf, ConfService } from 'src/app/services/conf.service';
 import { Observable } from 'rxjs';
+import { and } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-settings',
@@ -45,8 +46,10 @@ export class SettingsPage implements OnInit {
 
   constructor(public navCtrl: NavController,
     private confService: ConfService,
-    private global: GlobalService,) {
+    private global: GlobalService,
+    public alertCtrl: AlertController,) {
       this.conf.persona = this.global.email;
+      /*
       this.confs = this.confService.getConfs();
       this.confs.subscribe(
         element => {
@@ -61,10 +64,11 @@ export class SettingsPage implements OnInit {
             }
           })
         }
-      );
+      );*/
 
       this.cargar();
 
+      
 
     }
 
@@ -106,17 +110,21 @@ export class SettingsPage implements OnInit {
   }
 
   update(){
-    this.conf.rango = this.rango;
-    this.conf.melodia = this.melodia;
-    this.conf.repeticionAlarm = this.repeticionAlarm;
-    this.conf.volumen = this.volumen;
-    this.global.id = this.id;
-    this.global.rango = this.rango;
-    this.global.melodia = this.melodia;
-    this.global.repeticionAlarm = this.repeticionAlarm;
-    this.global.volumen = this.volumen; 
-    this.confService.updateConf(this.conf, this.id);
-    this.home();
+    if ((this.rango<1) || (this.rango>150)){
+      this.error();
+    } else {
+      this.conf.rango = this.rango;
+      this.conf.melodia = this.melodia;
+      this.conf.repeticionAlarm = this.repeticionAlarm;
+      this.conf.volumen = this.volumen;
+      this.global.id = this.id;
+      this.global.rango = this.rango;
+      this.global.melodia = this.melodia;
+      this.global.repeticionAlarm = this.repeticionAlarm;
+      this.global.volumen = this.volumen; 
+      this.confService.updateConf(this.conf, this.id);
+      this.home();
+    }
   }
   ionViewWillEnter(){
     this.cargar();
@@ -130,4 +138,23 @@ export class SettingsPage implements OnInit {
     this.global.repeticionAlarm = v;
     this.repeticionAlarm= v; 
   }
+
+  async error() {
+    const alert = await this.alertCtrl.create({
+      header: 'Ingreso inválido',
+      message: 'El valor del rango es incorrecto',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            ;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+}
 }

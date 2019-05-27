@@ -5,6 +5,7 @@ import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@io
 import { ToastController } from '@ionic/angular';
 import { GlobalService } from '../../services/global.service';
 import { persona, PersonasService } from '../../services/persona.service';
+import { conf, ConfService } from 'src/app/services/conf.service';
 import { Observable } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
@@ -38,6 +39,7 @@ export class MenuPrincipalPage implements OnInit {
   lngDest: number;
   latOri: number;
   lngOri: number;
+  confs : Observable<conf[]>;
 
   tipo: string;
 
@@ -45,6 +47,7 @@ export class MenuPrincipalPage implements OnInit {
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
     public toastController: ToastController,
+    private confService: ConfService,
     public navCtrl: NavController,
     private global: GlobalService,
     private PersonasService: PersonasService,
@@ -65,6 +68,21 @@ export class MenuPrincipalPage implements OnInit {
           })
         }
       );
+      this.confs = this.confService.getConfs();
+      this.confs.subscribe(
+        element => {
+          element.forEach(elment => {
+            if(elment.persona == this.global.email){
+              this.global.id = elment.id;
+              this.global.rango = elment.rango;
+              this.global.melodia = elment.melodia;
+              this.global.repeticionAlarm = elment.repeticionAlarm;
+              this.global.volumen = elment.volumen; 
+            }
+          })
+        }
+      );
+      
   }
 
   saveName(nombre: string, id: string){
