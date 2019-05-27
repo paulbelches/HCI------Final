@@ -27,14 +27,8 @@ export class AppComponent {
   ) {
     this.appPages = [
       {
-        title: 'Menú principal',
-        url: '/menu-principal/otro/0',
-        direct: 'root',
-        icon: 'home'
-      },
-      {
         title: 'Ruta Manual',
-        url: '/settings',
+        url: '/menu-principal/otro/0',
         direct: 'forward',
         icon: 'globe'
       },
@@ -46,7 +40,7 @@ export class AppComponent {
       },
       {
         title: 'Favoritos',
-        url: '/help',
+        url: '/favoritos',
         direct: 'forward',
         icon: 'star'
       },
@@ -61,12 +55,6 @@ export class AppComponent {
         url: '/settings',
         direct: 'forward',
         icon: 'settings'
-      },
-      {
-        title: 'Alarma Actual',
-        url: '/alarma',
-        direct: 'forward',
-        icon: 'alarm'
       },
       {
         title: 'Acerca de GeoWakeUp',

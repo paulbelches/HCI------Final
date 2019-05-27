@@ -19,7 +19,8 @@ export class FavoritosPage implements OnInit {
 
   constructor(
     public FavoritosService: FavoritosService,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public alertController: AlertController
 
   ) {}
 
@@ -28,26 +29,56 @@ export class FavoritosPage implements OnInit {
 
     this.favs.forEach(element => {
       element.forEach(item => {
-        var obj: { title: string, value: number, lat: number, lng: number } =
-        { title: item.id, value: item.value, lat: item.lat, lng: item.lng };
+        var obj: { title: string, value: number} =
+        { title: item.id, value: item.value };
         this.cardItems.push(obj);
       })
     });
 
   }
 
-  removeFavorite(favTitle){
+  async removeFavorite(favTitle){
 
-    this.favs.forEach(element => {
-      element.forEach(item => {
-        console.log(item.id);
-        if (item.title == favTitle){
-          console.log("Eliminando....", item.id);
-          this.FavoritosService.removeFavorite(item.id);
+    const alert = await this.alertController.create({
+      header: 'Eliminar de favoritos',
+      message: '¿Desea eliminar <strong>' + favTitle + '</strong> de favoritos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log("Cancelado");
+          }
+        }, {
+          text: 'Eliminar',
+          handler: () => {
+            this.favs = this.FavoritosService.getFavorites();
+
+            this.favs.forEach(element => {
+              element.forEach(item => {
+                if (item.id == favTitle)
+                  this.FavoritosService.removeFavorite(item.id);
+              })
+            });
+
+            location.reload();
+          }
         }
-      })
+      ]
     });
 
+    await alert.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Éxito!',
+      message: 'Elemento eliminado de la lista de favoritos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   pushAlarm(favTitle) {

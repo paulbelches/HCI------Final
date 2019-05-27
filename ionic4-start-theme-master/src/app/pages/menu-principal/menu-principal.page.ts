@@ -230,14 +230,7 @@ export class MenuPrincipalPage implements OnInit {
     await alert.present();
   }
 
-  async ayuda() {
-    const alert = await this.alertCtrl.create({
-      header: 'Ayuda',
-      message: '1. En primer lugar, debes ingresar la dirección a la que deseas dirigirte.<br>2. Luego, debes presionar el buton "Ubicar" para verificar la existencia de la dirección ingresada.<br>3. Finalmente, debes presionar en "Nueva alarma" para encontrar el tiempo estimado y la distancia a recorrer.',
-      buttons: ['OK'],
-      cssClass: 'popUp'
-    });
-
-    await alert.present();
+   ayuda() {
+    this.navCtrl.navigateForward('/help');
   }
 }

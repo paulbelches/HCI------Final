@@ -8,9 +8,7 @@
           <ion-text color="light" class="fw700">Mi perfil<br></ion-text>
         </ion-text>
       </ion-title>
-      <ion-buttons slot="end" >
-        <ion-icon name="information-circle-outline" style="zoom:2.0;" tappable (click)="ayuda()"></ion-icon>
-      </ion-buttons>
+      
     </ion-toolbar>
   </ion-header>
 
@@ -36,7 +34,7 @@
   <ion-item>
     <ion-label>
       <h2><b>Total de rutas guardadas: </b></h2>
-      <h2 style="text-align: center;">{{this.contador}}</h2>
+      <h2 style="text-align: center;">{{this.global.contador}}</h2>
     </ion-label>
   </ion-item>
 
