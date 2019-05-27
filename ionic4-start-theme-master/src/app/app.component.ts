@@ -34,7 +34,7 @@ export class AppComponent {
       },
       {
         title: 'Ruta Manual',
-        url: '/settings',
+        url: '/menu-principal/otro/0',
         direct: 'forward',
         icon: 'globe'
       },
