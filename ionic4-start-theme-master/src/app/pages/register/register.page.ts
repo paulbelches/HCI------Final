@@ -118,7 +118,7 @@ export class RegisterPage implements OnInit {
 
   pushPage(){
     this.global.email = this.username;
-    this.navCtrl.navigateForward('/home-results/' + this.username);
+    this.navCtrl.navigateForward('/menu-principal/otro/0');
   }
 
 
@@ -130,7 +130,6 @@ export class RegisterPage implements OnInit {
     try {
 
       const res = await this.afAuth.auth.createUserWithEmailAndPassword(username, password)
-      this.navCtrl.navigateRoot('/home-results/');
       this.persona.email = username;
       this.persona.nombre = fullName;
       this.conf.persona = username;

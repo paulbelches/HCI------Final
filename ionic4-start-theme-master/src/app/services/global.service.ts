@@ -16,6 +16,8 @@ export class GlobalService {
   public repeticionVibra: number;
   public volumen: number;
 
+  public contador: number;
+  public primera: boolean;
 
   public dates: any[];
   public paneles: any[];
@@ -26,6 +28,9 @@ export class GlobalService {
     this.email = null;
     this.idDoc = null;
     this.nombre = null;
+    this.primera = true;
+    this.contador = 0;
+    
     this.dates = [];
     this.paneles = [];
     this.datesEarth = [];
