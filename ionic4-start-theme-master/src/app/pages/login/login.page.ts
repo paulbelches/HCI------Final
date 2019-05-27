@@ -100,21 +100,6 @@ export class LoginPage implements OnInit {
           text: 'Confirmar',
           handler: async data => {
             this.resetPassword(data.email);
-            //const loader = await this.loadingCtrl.create({
-            //  duration: 2000
-            //});
-           
-            //loader.present();
-            //loader.onWillDismiss().then(async l => {
-            //  const toast = await this.toastCtrl.create({
-            //    showCloseButton: true,
-            //    message: 'Email was sended successfully.',
-            //    duration: 3000,
-            //    position: 'bottom'
-            // });
-
-            //  toast.present();
-            //});
           }
         }
       ]
@@ -134,8 +119,8 @@ export class LoginPage implements OnInit {
   async login() {
     const {username, password} = this
     try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password)
-      this.navCtrl.navigateRoot('/menu-principal/');
+      const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password);
+      // this.navCtrl.navigateRoot('/menu-principal');
       this.pushPage();
     } catch(err) {
       this.showError(err);
@@ -154,7 +139,7 @@ export class LoginPage implements OnInit {
 
   pushPage(){
     this.global.email = this.username;
-    this.navCtrl.navigateForward('/menu-principal');
+    this.navCtrl.navigateForward('/menu-principal/otro/0');
   }
 
   async showError(error){

@@ -1,11 +1,13 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController, NavController, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, AlertController, MenuController } from '@ionic/angular';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { ToastController } from '@ionic/angular';
 import { GlobalService } from '../../services/global.service';
 import { persona, PersonasService } from '../../services/persona.service';
 import { Observable } from 'rxjs';
+
+import { ActivatedRoute } from '@angular/router';
 
 declare var google;
 var map;
@@ -37,6 +39,8 @@ export class MenuPrincipalPage implements OnInit {
   latOri: number;
   lngOri: number;
 
+  tipo: string;
+
   constructor(
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
@@ -45,6 +49,8 @@ export class MenuPrincipalPage implements OnInit {
     private global: GlobalService,
     private PersonasService: PersonasService,
     public alertCtrl: AlertController,
+    public menuCtrl: MenuController,
+    private activateRoute: ActivatedRoute
     ) {
       console.log("Correoooo: " + this.global.email);
 
@@ -53,14 +59,12 @@ export class MenuPrincipalPage implements OnInit {
       this.personas.subscribe(
         element => {
           element.forEach(elment => {
-            // console.log("elemento:")
-            // console.log(elment);
             if(elment.email == this.global.email){
               this.saveName(elment.nombre.toString(), elment.id);
             }
           })
         }
-      )
+      );
   }
 
   saveName(nombre: string, id: string){
@@ -74,10 +78,12 @@ export class MenuPrincipalPage implements OnInit {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     this.loadMap();
+    
+    this.tipo = this.activateRoute.snapshot.paramMap.get('tipo');
   }
 
   ionViewWillEnter() {
-    
+    this.menuCtrl.enable(true);    
   }
 
   async loadMap(){
@@ -98,6 +104,12 @@ export class MenuPrincipalPage implements OnInit {
     .addListenerOnce(this.mapRef, 'idle', () => {
       loading.dismiss();
       this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
+
+      if(this.tipo != 'otro'){
+        this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
+        console.log("El lugar es: " + this.lugar);
+        this.calculateAndDisplayRoute();
+      }
     });
   }
 
