@@ -110,6 +110,11 @@ export class SettingsPage implements OnInit {
     this.conf.melodia = this.melodia;
     this.conf.repeticionAlarm = this.repeticionAlarm;
     this.conf.volumen = this.volumen;
+    this.global.id = this.id;
+    this.global.rango = this.rango;
+    this.global.melodia = this.melodia;
+    this.global.repeticionAlarm = this.repeticionAlarm;
+    this.global.volumen = this.volumen; 
     this.confService.updateConf(this.conf, this.id);
     this.home();
   }
