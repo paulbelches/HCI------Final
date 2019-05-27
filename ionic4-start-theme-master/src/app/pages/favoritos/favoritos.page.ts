@@ -24,7 +24,8 @@ export class FavoritosPage implements OnInit {
 
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
+
     this.favs = this.FavoritosService.getFavorites();
 
     this.favs.forEach(element => {
@@ -81,8 +82,9 @@ export class FavoritosPage implements OnInit {
     await alert.present();
   }
 
-  pushAlarm(favTitle) {
-
+  pushAlarm(favTitle, valor) {
+    this.cardItems = [];
+    this.FavoritosService.updateFavorite(favTitle, valor);
     this.navCtrl.navigateForward('/menu-principal/favorito' + '/' + 'UVG');
   }
 

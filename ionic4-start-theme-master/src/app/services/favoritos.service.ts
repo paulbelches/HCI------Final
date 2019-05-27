@@ -19,6 +19,7 @@ export class FavoritosService {
 
   private favCollection: AngularFirestoreCollection<Favorito>;
   private favoritos: Observable<Favorito[]>;
+  private singleFavorito: Observable<Favorito>;
   private docRef: DocumentReference;
 
   private cardItems = [];
@@ -58,6 +59,7 @@ export class FavoritosService {
   }
 
   getFav(id:string): Observable<Favorito> {
+    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
     return this.favCollection.doc<Favorito>(id).valueChanges().pipe(
       take(1),
       map(favorito => {
@@ -107,5 +109,11 @@ export class FavoritosService {
       return true;
     }
 
+  }
+
+  updateFavorite(docID:string, valor:number): Promise<void> {
+    return this.favCollection.doc(docID).set({
+      value: valor+1
+    });
   }
 }
