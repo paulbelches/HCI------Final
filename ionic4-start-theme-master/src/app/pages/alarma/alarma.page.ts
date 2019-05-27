@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, NavController } from '@ionic/angular';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Favorito, FavoritosService } from 'src/app/services/favoritos.service';
 import { AlarmaPageModule } from './alarma.module';
-
 
 declare var google;
 
@@ -14,8 +14,6 @@ declare var google;
   templateUrl: './alarma.page.html',
   styleUrls: ['./alarma.page.scss'],
 })
-
-
 
 export class AlarmaPage implements OnInit 
 {
@@ -31,13 +29,18 @@ export class AlarmaPage implements OnInit
   controlFav=true;
 
   passedVar=null;
+
+  newFavorito : Favorito;
+
   constructor(
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
     private nativeGeocoder: NativeGeocoder,
     public toastController: ToastController,
     public navCtrl: NavController,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    public FavoritosService: FavoritosService,
+    public alertController: AlertController
     ) 
   {
     this.latOri =parseFloat(this.activateRoute.snapshot.paramMap.get('latOri'));
@@ -47,8 +50,6 @@ export class AlarmaPage implements OnInit
     this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
     this.getTimeAndDist(this.latOri,this.lngOri,this.latDest,this.lngDest);
 
-    
-
 
     console.log(this.latOri);
     console.log(this.lngOri);
@@ -56,10 +57,8 @@ export class AlarmaPage implements OnInit
     console.log(this.lngDest);
     console.log(this.lugar);
 
-     
 
-
-
+    this.controlFav = this.FavoritosService.checkExistence(this.lugar);
    }
 
    private async getLocation(){
@@ -183,19 +182,73 @@ export class AlarmaPage implements OnInit
     console.log(this.lngOri);
     console.log(this.latDest);
     console.log(this.lngDest);
-    
-    
-    
-    
-    
-   
-
-    
-
-
-
-
-
   }
+
+  checkExistence(){
+    if (this.controlFav)
+      this.agregarFavoritos();
+    else
+      this.alertaExistente();
+  }
+
+
+  async agregarFavoritos() {
+
+    const alert = await this.alertController.create({
+      header: 'Agregar a favoritos',
+      message: '¿Desea agregar <strong>' + this.lugar + '</strong> a favoritos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log("Cancelado");
+          }
+        }, {
+          text: 'Agregar',
+          handler: () => {
+            this.newFavoriteFirebase();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Éxito!',
+      message: '<strong>' + this.lugar + '</strong> ha sido agregado a la lista de favoritos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async alertaExistente() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: '<strong>' + this.lugar + '</strong> ya existe en su lista de favoritos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  newFavoriteFirebase(){
+    this.newFavorito = {
+      title: this.lugar,
+      value: 1
+    }
+
+    if (this.FavoritosService.addFavorite(this.newFavorito, this.lugar)){
+      this.presentAlert();
+      this.controlFav = false;
+    }
+  }
+
+
 
 }

@@ -10,8 +10,6 @@ export interface Favorito{
   id?: string;
   title : string;
   value: number;
-  lat: number;
-  lng: number;
 }
 
 @Injectable({
@@ -31,9 +29,10 @@ export class FavoritosService {
   ) {
     // console.log("Constructor de favoritos");
     // this.global.idDoc = 'UiOkZnIhayc9mny1APs8';
-    
+
     console.log(this.global.idDoc);
-    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
+    // this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc('UiOkZnIhayc9mny1APs8').collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -63,4 +62,17 @@ export class FavoritosService {
     console.log("Se ejecutó el método para eliminar", id);
     return this.favCollection.doc(id).delete();
   }
+
+  addFavorite(favorito: Favorito, docID: string): Promise<void> {
+    return this.favCollection.doc(docID).set(favorito);
+  }
+
+  checkExistence (docID: string){
+    if (this.favCollection.doc(docID).get())
+      return true;
+    else
+      return true;
+  }
+
+
 }
