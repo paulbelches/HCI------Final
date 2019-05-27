@@ -4,6 +4,8 @@ import { AngularFirestoreCollection, DocumentReference } from '@angular/fire/fir
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import { GlobalService } from '../services/global.service';
+
 export interface Favorito{
   id?: string;
   title : string;
@@ -21,8 +23,15 @@ export class FavoritosService {
 
   private cardItems = [];
 
-  constructor(private db: AngularFirestore) {
-    this.favCollection = this.db.collection<Favorito>('persona').doc('UiOkZnIhayc9mny1APs8').collection('favoritos');
+  constructor(
+    private global: GlobalService, 
+    private db: AngularFirestore
+  ) {
+    // console.log("Constructor de favoritos");
+    // this.global.idDoc = 'UiOkZnIhayc9mny1APs8';
+    
+    console.log(this.global.idDoc);
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
