@@ -8,6 +8,15 @@ export class GlobalService {
   public idDoc: string;
   public email: string;
   public nombre: string;
+
+  public magnitud : number;
+  public id: string;
+  public rango: number;
+  public repeticionAlarm: number;
+  public repeticionVibra: number;
+  public volumen: number;
+
+
   public dates: any[];
   public paneles: any[];
   public datesEarth: any[];
@@ -20,6 +29,12 @@ export class GlobalService {
     this.dates = [];
     this.paneles = [];
     this.datesEarth = [];
-    this.earth = []
+    this.earth = [];
+    this.magnitud = 0;
+    this.id="" ;
+    this.rango = 0 ;
+    this.repeticionAlarm= 0;
+    this.repeticionVibra= 0;
+    this.volumen= 0;
    }
 }

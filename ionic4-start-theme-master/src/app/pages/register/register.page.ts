@@ -4,6 +4,7 @@ import { NavController, MenuController, LoadingController, AlertController} from
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { persona, PersonasService } from 'src/app/services/persona.service';
+import { conf, ConfService } from 'src/app/services/conf.service';
 import { Observable } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
 
@@ -27,6 +28,15 @@ export class RegisterPage implements OnInit {
     nombre : 'Paul Belches' ,
   }
 
+  conf: conf = {
+    persona : '',
+    magnitud : 1,
+    melodia: 1,
+    rango: 1,
+    repeticionAlarm: 1,
+    repeticionVibra: 1,
+    volumen: 50,
+  }
   userId = null;
 
   constructor(
@@ -37,6 +47,7 @@ export class RegisterPage implements OnInit {
     private formBuilder: FormBuilder,
     public afAuth: AngularFireAuth,
     private personaService: PersonasService,
+    private confService: ConfService,
     private route: ActivatedRoute,
     private global: GlobalService,
   ) { }
@@ -58,6 +69,9 @@ export class RegisterPage implements OnInit {
 
     } else {
       this.personaService.addpersona(this.persona).then(() => {
+        loading.dismiss();
+      });
+      this.confService.addConf(this.conf).then(() => {
         loading.dismiss();
       });
     }
@@ -119,6 +133,7 @@ export class RegisterPage implements OnInit {
       this.navCtrl.navigateRoot('/home-results/');
       this.persona.email = username;
       this.persona.nombre = fullName;
+      this.conf.persona = username;
       this.saveUser();
       this.pushPage();
 
