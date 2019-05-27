@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'menu-principal/:tipo/:lugar', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
-  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },  { path: 'nfc', loadChildren: './pages/nfc/nfc.module#NFCPageModule' },
+
 ];
 
 @NgModule({

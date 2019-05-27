@@ -12,80 +12,70 @@
   </ion-header>
   
   <ion-content>
-    <ion-card class="bg-light">
-        <ion-card-content>
-          <h2>
-            <ion-text color="primary"><strong>Configuracion de la alarma</strong></ion-text>
-          </h2>
-          <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <h5>
-                    <ion-text>Rango de destino</ion-text>
-                  </h5>
-                </ion-col>
-                <ion-col size="4">
-                      <ion-input type="number" min="0" placeholder="0" style="margin-top: -8%;" [(ngModel)]="rango"></ion-input>
-                </ion-col>
-                <ion-col size="2">
-                    <h5>
-                        <ion-text> Km</ion-text>
-                    </h5>
-                </ion-col>
-              </ion-row>
-          </ion-grid>
-          <h5>
-            <ion-text>Volúmen</ion-text>
-          </h5>
-          <ion-item>
-              <ion-range min="0" max="100" step="2" [(ngModel)]="volumen" >
-                <ion-icon slot="start" name="volume-off"></ion-icon>
-                <ion-icon slot="end" name="volume-high"></ion-icon>
-              </ion-range>
-            </ion-item>
-
-          <h2>
-            <ion-text color="primary"><strong>Vibración</strong></ion-text>
-          </h2>
-
-          <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <h5>
-                    <ion-text>Repeticiones</ion-text>
-                  </h5>
-                </ion-col>
-                <ion-col>                    
-                    <ion-input type="number" min="0"  placeholder="0" style="margin-top: -8%;" [(ngModel)]="repeticionVibra"></ion-input>
-                </ion-col>
-              </ion-row>
-              <ion-row>
+      <ion-card class="bg-light">
+          <ion-card-content>
+            <h2>
+              <ion-text color="primary"><strong>Configuracion de la alarma</strong></ion-text>
+            </h2>
+            <ion-grid>
+                <ion-row>
                   <ion-col>
                     <h5>
-                      <ion-text>Magnitud</ion-text>
+                      <ion-text>Rango de destino</ion-text>
                     </h5>
                   </ion-col>
-                  <ion-col>
-                      <ion-input type="number" min="0"  placeholder="0" style="margin-top: -8%;" [(ngModel)]="magnitud"></ion-input>
+                  <ion-col size="4">
+                        <ion-input type="number" min="0" placeholder="0" style="margin-top: -8%;" [(ngModel)]="rango"></ion-input>
+                  </ion-col>
+                  <ion-col size="2">
+                      <h5>
+                          <ion-text> m</ion-text>
+                      </h5>
                   </ion-col>
                 </ion-row>
-          </ion-grid>
-          <h2>
-              <ion-text color="primary"><strong>Repeticiones</strong></ion-text>
-          </h2>
-          <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-text>Repetir cada</ion-text>
-                </ion-col>
-                <ion-col>
-                    <ion-input type="number" min="0" aria-placeholder="0"[(ngModel)]="repeticionAlarm" ></ion-input>
-                </ion-col>
-                <ion-col>
-                    <ion-text>minutos</ion-text>
-                </ion-col>
-              </ion-row>
-          </ion-grid>
+            </ion-grid>
+            <h5>
+              <ion-text>Volúmen</ion-text>
+            </h5>
+            <ion-item>
+                <ion-range min="0.1" max="1" step="0.1" [(ngModel)]="volumen" >
+                  <ion-icon slot="start" name="volume-off"></ion-icon>
+                  <ion-icon slot="end" name="volume-high"></ion-icon>
+                </ion-range>
+              </ion-item>
+  
+            <h2>
+              <ion-text color="primary"><strong>Melodía</strong></ion-text>
+            </h2>
+                <ion-radio-group>
+                  <ion-item>
+                    <ion-label>Melodía 1</ion-label>
+                    <ion-radio slot="start" value="0" [checked]="melo1" (ionSelect)="setMelodi(1)"></ion-radio>
+                  </ion-item>
+              
+                  <ion-item>
+                    <ion-label>Melodía 2</ion-label>
+                    <ion-radio slot="start" value="1" [checked]="melo2" (ionSelect)="setMelodi(2)"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+  
+            <h2>
+                <ion-text color="primary"><strong>Repeticiones</strong></ion-text>
+            </h2>
+            <ion-radio-group>
+                <ion-list-header>
+                    <ion-label>Desea que se repita:</ion-label>
+                  </ion-list-header>
+                <ion-item>
+                  <ion-label>Sí</ion-label>
+                  <ion-radio slot="start" value="0" [checked]="repe1" (ionSelect)="setAlarm(true)"></ion-radio>
+                </ion-item>
+            
+                <ion-item>
+                  <ion-label>No</ion-label>
+                  <ion-radio slot="start" value="1" [checked]="repe2" (ionSelect)="setAlarm(false)"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
 
           <ion-grid>
               <ion-row>

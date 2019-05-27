@@ -30,11 +30,9 @@ export class RegisterPage implements OnInit {
 
   conf: conf = {
     persona : '',
-    magnitud : 1,
     melodia: 1,
     rango: 1,
-    repeticionAlarm: 1,
-    repeticionVibra: 1,
+    repeticionAlarm: false,
     volumen: 50,
   }
   userId = null;

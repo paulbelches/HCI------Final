@@ -7,12 +7,10 @@ import { map, take } from 'rxjs/operators';
 export interface conf {
   id?: string,
   persona : string;
-  magnitud : number;
-  melodia: number;
-  rango: number;
-  repeticionAlarm: number;
-  repeticionVibra: number;
+  rango : number;
   volumen: number;
+  melodia: number;
+  repeticionAlarm: boolean;
 
 }
 @Injectable({
@@ -54,11 +52,9 @@ export class ConfService {
   updateConf(conf: conf, id:string): Promise<void> {
     return this.confCollection.doc(id).update({
       persona : conf.persona,
-      magnitud : conf.magnitud,
       melodia: conf.melodia,
       rango: conf.rango,
       repeticionAlarm: conf.repeticionAlarm,
-      repeticionVibra: conf.repeticionVibra,
       volumen: conf.volumen,
     
     });

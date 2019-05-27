@@ -34,7 +34,7 @@ export class AppComponent {
       },
       {
         title: 'NFC',
-        url: '/graphics',
+        url: '/nfc',
         direct: 'forward',
         icon: 'wifi'
       },

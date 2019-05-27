@@ -9,11 +9,10 @@ export class GlobalService {
   public email: string;
   public nombre: string;
 
-  public magnitud : number;
   public id: string;
   public rango: number;
-  public repeticionAlarm: number;
-  public repeticionVibra: number;
+  public melodia: number;
+  public repeticionAlarm: boolean;
   public volumen: number;
 
   public contador: number;
@@ -35,11 +34,10 @@ export class GlobalService {
     this.paneles = [];
     this.datesEarth = [];
     this.earth = [];
-    this.magnitud = 0;
     this.id="" ;
+    this.melodia = 0;
     this.rango = 0 ;
-    this.repeticionAlarm= 0;
-    this.repeticionVibra= 0;
+    this.repeticionAlarm= false;
     this.volumen= 0;
    }
 }
