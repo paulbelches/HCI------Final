@@ -8,7 +8,6 @@ import { GlobalService } from '../services/global.service';
 
 export interface Favorito{
   id?: string;
-  title : string;
   value: number;
 }
 
@@ -20,6 +19,7 @@ export class FavoritosService {
 
   private favCollection: AngularFirestoreCollection<Favorito>;
   private favoritos: Observable<Favorito[]>;
+  private docRef: DocumentReference;
 
   private cardItems = [];
 
@@ -29,9 +29,9 @@ export class FavoritosService {
   ) {
     // console.log("Constructor de favoritos");
     // this.global.idDoc = 'UiOkZnIhayc9mny1APs8';
-    
-    console.log(this.global.idDoc);
-    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
+
+    // this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -44,6 +44,16 @@ export class FavoritosService {
   }
 
   getFavorites() {
+    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favoritos = this.favCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
     return this.favoritos;
   }
 
@@ -58,6 +68,44 @@ export class FavoritosService {
   }
 
   removeFavorite(id): Promise<void> {
+    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+
+    console.log("Se ejecutó el método para eliminar", id);
     return this.favCollection.doc(id).delete();
+  }
+
+  addFavorite(favorito: Favorito, docID: string): Promise<void> {
+    return this.favCollection.doc(docID).set(favorito);
+  }
+
+  checkExistence (docID: string){
+    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favoritos = this.favCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+
+    var existe;
+
+    this.favoritos.forEach(element => {
+      element.forEach(item => {
+        if (item.id == docID){
+          existe = false;
+          return false;
+        }
+      })
+    });
+
+    if (!existe){
+      return false;
+    } else {
+      return true;
+    }
+
   }
 }

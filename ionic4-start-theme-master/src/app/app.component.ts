@@ -40,7 +40,7 @@ export class AppComponent {
       },
       {
         title: 'Favoritos',
-        url: '/help',
+        url: '/favoritos',
         direct: 'forward',
         icon: 'star'
       },

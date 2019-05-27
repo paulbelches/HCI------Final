@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, NavController } from '@ionic/angular';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Favorito, FavoritosService } from 'src/app/services/favoritos.service';
 import { AlarmaPageModule } from './alarma.module';
-
+import { Observable } from 'rxjs';
 
 declare var google;
 
@@ -15,10 +16,10 @@ declare var google;
   styleUrls: ['./alarma.page.scss'],
 })
 
-
-
 export class AlarmaPage implements OnInit 
 {
+
+  favs: Observable<Favorito[]>;
 
   latOri = null;
   lngOri = null;
@@ -27,17 +28,23 @@ export class AlarmaPage implements OnInit
   lugar = null;
   tiempo=null;
   distancia=null;
+  audio=null;
   
   controlFav=true;
 
   passedVar=null;
+
+  newFavorito : Favorito;
+
   constructor(
     private geolocation: Geolocation,
     private loadCtrl: LoadingController,
     private nativeGeocoder: NativeGeocoder,
     public toastController: ToastController,
     public navCtrl: NavController,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    public FavoritosService: FavoritosService,
+    public alertController: AlertController
     ) 
   {
     this.latOri =parseFloat(this.activateRoute.snapshot.paramMap.get('latOri'));
@@ -47,18 +54,13 @@ export class AlarmaPage implements OnInit
     this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
     this.getTimeAndDist(this.latOri,this.lngOri,this.latDest,this.lngDest);
 
-    
-
+    this.audio = new Audio('assets/sounds/alarma1.mp3');
 
     console.log(this.latOri);
     console.log(this.lngOri);
     console.log(this.latDest);
     console.log(this.lngDest);
     console.log(this.lugar);
-
-     
-
-
 
    }
 
@@ -85,8 +87,10 @@ export class AlarmaPage implements OnInit
     else
     {
       this.passedVar=porcentaje;
-
     }
+    
+    if (porcentaje>0.8)
+    {this.audio.play();}
     
     
         
@@ -126,21 +130,21 @@ export class AlarmaPage implements OnInit
           if (status !== 'OK') {
             alert('Error was: ' + status);
           } else {
-            
-              var results = response.rows[0].elements;   
+
+              var results = response.rows[0].elements;
               var distancia=results[0].distance.value;
               localStorage['distanciaNum']=distancia;
-                            
-              
+
+
           }
         });
 
-        
-       
+
+
   }
 
   getTimeAndDist(latOrigen,lngOrigen,latDest,lngDest)
-  { 
+  {
     var origin = {lat: latOrigen, lng: lngOrigen};
     var destination = {lat: latDest, lng: lngDest};
     var geocoder = new google.maps.Geocoder;
@@ -156,46 +160,105 @@ export class AlarmaPage implements OnInit
           if (status !== 'OK') {
             alert('Error was: ' + status);
           } else {
-            
-              var results = response.rows[0].elements;   
+
+              var results = response.rows[0].elements;
               var tiempo=results[0].duration.text;
               var distancia=results[0].distance.text;
               console.log(tiempo);
               console.log(distancia);
               localStorage['tiempo']=tiempo;
-              localStorage['distancia']=distancia;        
+              localStorage['distancia']=distancia;
               var distancia=results[0].distance.value;
-              localStorage['distanciaTotal']=distancia;      
-              
+              localStorage['distanciaTotal']=distancia;
+
           }
         });
 
-        
-       
+
+
   }
-  
 
-  ngOnInit() 
+
+  ngOnInit()
   {
-    this.timerTick();  
-    console.log(this.latOri);
-    console.log(this.lngOri);
-    console.log(this.lngOri);
-    console.log(this.latDest);
-    console.log(this.lngDest);
-    
-    
-    
-    
-    
-   
+    this.timerTick();
+    this.existsInFirebase();
+  }
 
-    
+  checkExistence(){
+    if (this.controlFav)
+      this.agregarFavoritos();
+    else
+      this.alertaExistente();
+  }
 
 
+  async agregarFavoritos() {
 
+    const alert = await this.alertController.create({
+      header: 'Agregar a favoritos',
+      message: '¿Desea agregar <strong>' + this.lugar + '</strong> a favoritos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log("Cancelado");
+          }
+        }, {
+          text: 'Agregar',
+          handler: () => {
+            this.newFavoriteFirebase();
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Éxito!',
+      message: '<strong>' + this.lugar + '</strong> ha sido agregado a la lista de favoritos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async alertaExistente() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: '<strong>' + this.lugar + '</strong> ya existe en su lista de favoritos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  newFavoriteFirebase(){
+    this.newFavorito = {
+      value: 1
+    }
+
+    if (this.FavoritosService.addFavorite(this.newFavorito, this.lugar)){
+      this.presentAlert();
+      this.controlFav = false;
+    }
+  }
+
+  existsInFirebase(){
+    this.favs = this.FavoritosService.getFavorites();
+
+    this.favs.forEach(element => {
+      element.forEach(item => {
+        if (item.id == this.lugar){
+          this.controlFav = false;
+        }
+      })
+    });
   }
 
 }

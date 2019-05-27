@@ -30,7 +30,7 @@
 
             <div class="card-buttons" id="{{'card-'+i}}">
                 <ion-card-content>
-                    <ion-button>
+                    <ion-button (click)="pushAlarm(item.title)">
                         <ion-icon slot="start" name="alarm"></ion-icon>
                         Activar
                     </ion-button>
