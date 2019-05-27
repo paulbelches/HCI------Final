@@ -5,75 +5,120 @@
       </ion-buttons>
       <ion-title>
         <ion-text color="light">
-          <ion-text color="light" class="fw700 titulo4">Información general</ion-text>
+          <ion-text color="light" class="fw700 titulo4">Configuraciones</ion-text>
         </ion-text>
       </ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
-  
-    <div class="bg-profile">
-      <img src="assets/img/ods11.png">
-    </div>
-  
-    <ion-card class="bg-light" no-margin>
-      <ion-card-content>
-        <h1 margin-bottom>
-          <ion-text color="primary"><strong>Propósito de Solars</strong></ion-text>
-        </h1>
-        
-        <div class="textos">
-          <p margin-bottom>
-            La razón de la creación de Solaris va de la mano con el Objetivo 
-            de Desarrollo Sotenible (ODS) 11: Ciudades y Comunidades Sostenibles. 
-            Si bien, aunque el ODS se enfoca en transformar la forma en que 
-            se construyen y administran los espacios urbanos, la manera de 
-            poder administrar dichos espacios conlleva poder concientizar a 
-            las personas sobre su impacto en el desarrollo sostenible de las 
-            comunidades o ciudades. 
-            
-            <br><br>
-            
-            Solars tiene el propósito de crear esa 
-            concientización en la ciudadanía de manera que el desarrollo de 
-            estas comunidades sea factible y viable. De manera que si las 
-            personas pudieran conocer cómo sus hábitos impactan al planeta, 
-            estos pudieran cambiarlos y mejorar en los aspectos que más 
-            afectan al planeta, tal y como Solars plantea mostrar a través 
-            de su test de huella de carbono.
-            
-            <br><br>
-            
-            Por otro lado, Solaris también 
-            tiene el propósito de mostrar la cantidad de páneles solares que 
-            necesitaría cada persona según su consumo energético, para que 
-            así las personas puedan conocer sobre esta fuente de energía y,
-              en algunos casos, que la persona pudiera tener en mente la 
-              posibilidad de instalar y utilizar páneles solares en el futuro.
-              
-            <br><br>  
-            
-            Solars es una aplicación que tiene como objetivo hacer factible 
-            la administración de áreas urbanas, a tener ciudadanos más 
-            amigables con el medio ambiente, y haciendo factibles proyectos 
-            de urbanización futuros. Según el sitio oficial del ODS, las 
-            ciudades solo ocupan el 3% de la tierra, pero representan del 
-            60 al 80% del consumo de energía y el 75% de las emisiones de 
-            carbono. 
-            
-            <br><br>
+    <ion-card class="bg-light">
+        <ion-card-content>
+          <h2>
+            <ion-text color="primary"><strong>Configuracion de la alarma</strong></ion-text>
+          </h2>
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <h5>
+                    <ion-text>Rango de destino</ion-text>
+                  </h5>
+                </ion-col>
+                <ion-col size="4">
+                      <ion-input type="number"  placeholder="0" style="margin-top: -8%;"></ion-input>
+                </ion-col>
+                <ion-col size="2">
+                    <h5>
+                        <ion-text> Km</ion-text>
+                    </h5>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+          <h2>
+            <ion-text color="primary"><strong>Sonidos</strong></ion-text>
+          </h2>
+          <ion-grid>
+              <ion-row>
+                  <h5>
+                      <ion-text>Melodía</ion-text>
+                  </h5>
+              </ion-row>
+              <ion-row>
+                <ion-col>
 
-            Además, 1.2 mil trabajos de urbanización dependen de 
-            un ambiente sano y estable, en lo cual contribuiría Solaris, 
-            gracias a las mejoras ambientales, gracias a los ciudadanos, 
-            que compensarían la gestión de dichos proyectos. 
-              
-          </p>
-        </div>
-        
-      </ion-card-content>
-    </ion-card>
-  
+                      <ion-item>
+                        <ion-select placeholder="Elegir">
+                          <ion-select-option value="1">Canción 1</ion-select-option>
+                          <ion-select-option value="2">Canción 2</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+          <h5>
+            <ion-text>Volúmen</ion-text>
+          </h5>
+          <ion-item>
+              <ion-range min="0" max="100" step="2">
+                <ion-icon slot="start" name="volume-off"></ion-icon>
+                <ion-icon slot="end" name="volume-high"></ion-icon>
+              </ion-range>
+            </ion-item>
+          <h2>
+            <ion-text color="primary"><strong>Vibración</strong></ion-text>
+          </h2>
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <h5>
+                    <ion-text>Repeticiones</ion-text>
+                  </h5>
+                </ion-col>
+                <ion-col>                    
+                    <ion-input type="number"  placeholder="0" style="margin-top: -8%;"></ion-input>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <h5>
+                      <ion-text>Magnitud</ion-text>
+                    </h5>
+                  </ion-col>
+                  <ion-col>
+                      <ion-input type="number"  placeholder="0" style="margin-top: -8%;"></ion-input>
+                  </ion-col>
+                </ion-row>
+          </ion-grid>
+          <h2>
+              <ion-text color="primary"><strong>Repeticiones</strong></ion-text>
+          </h2>
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-text>Repetir cada</ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-input type="number" value="3"></ion-input>
+                </ion-col>
+                <ion-col>
+                    <ion-text>minutos</ion-text>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-button color="primary">Guardar</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button color="primary">Cancelar</ion-button>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+
+        </ion-card-content>
+      </ion-card>
   </ion-content>
   

@@ -58,7 +58,7 @@ export class AppComponent {
       },
       {
         title: 'Configuración',
-        url: '/help',
+        url: '/settings',
         direct: 'forward',
         icon: 'settings'
       },
