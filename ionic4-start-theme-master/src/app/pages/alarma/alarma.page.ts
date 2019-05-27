@@ -27,6 +27,7 @@ export class AlarmaPage implements OnInit
   lugar = null;
   tiempo=null;
   distancia=null;
+  audio=null;
   
   controlFav=true;
 
@@ -48,7 +49,8 @@ export class AlarmaPage implements OnInit
     this.getTimeAndDist(this.latOri,this.lngOri,this.latDest,this.lngDest);
 
     
-
+    this.audio = new Audio('assets/sounds/alarma1.mp3');
+    
 
     console.log(this.latOri);
     console.log(this.lngOri);
@@ -85,8 +87,10 @@ export class AlarmaPage implements OnInit
     else
     {
       this.passedVar=porcentaje;
-
     }
+    
+    if (porcentaje>0.8)
+    {this.audio.play();}
     
     
         
