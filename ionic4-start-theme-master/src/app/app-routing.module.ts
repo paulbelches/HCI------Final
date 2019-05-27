@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'menu-principal', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
-  { path: 'menu-principal/:latDest/:lngDest/:lugar', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
+  { path: 'menu-principal/:favorito/:lugar', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
 ];
 
 @NgModule({

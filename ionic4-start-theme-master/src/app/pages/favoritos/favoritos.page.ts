@@ -52,7 +52,7 @@ export class FavoritosPage implements OnInit {
 
   pushAlarm(favTitle) {
 
-    this.navCtrl.navigateForward('/menu-principal/' + '-90' + '/' + '14.002' + '/' + 'UVG');
+    this.navCtrl.navigateForward('/menu-principal/favorito' + '/' + 'UVG');
   }
 
 }
