@@ -14,7 +14,9 @@ const routes: Routes = [
   { path: 'menu-principal/:tipo/:lugar', loadChildren: './pages/menu-principal/menu-principal.module#MenuPrincipalPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+  { path: 'nfc', loadChildren: './pages/nfc/nfc.module#NFCPageModule' },
   { path: 'menu-principal/:favorito/:lugar', loadChildren: './pages/alarma/alarma.module#AlarmaPageModule' },
+
 ];
 
 @NgModule({

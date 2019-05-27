@@ -137,6 +137,11 @@ export class LoginPage implements OnInit {
       .catch((error) => this.showError(error)) 
   }
 
+  ayuda()
+  {
+    this.navCtrl.navigateForward('/help');
+  }
+
   pushPage(){
     this.global.email = this.username;
     this.navCtrl.navigateForward('/menu-principal/otro/0');
