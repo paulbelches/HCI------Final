@@ -7,6 +7,8 @@ import { ToastController, AlertController } from '@ionic/angular';
 import { Favorito, FavoritosService } from 'src/app/services/favoritos.service';
 import { AlarmaPageModule } from './alarma.module';
 import { Observable } from 'rxjs';
+import { GlobalService } from '../../services/global.service';
+
 
 declare var google;
 
@@ -44,7 +46,8 @@ export class AlarmaPage implements OnInit
     public navCtrl: NavController,
     private activateRoute: ActivatedRoute,
     public FavoritosService: FavoritosService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private global: GlobalService
     ) 
   {
     this.latOri =parseFloat(this.activateRoute.snapshot.paramMap.get('latOri'));
@@ -56,11 +59,16 @@ export class AlarmaPage implements OnInit
 
     this.audio = new Audio('assets/sounds/alarma1.mp3');
 
-    console.log(this.latOri);
-    console.log(this.lngOri);
-    console.log(this.latDest);
-    console.log(this.lngDest);
-    console.log(this.lugar);
+    //console.log(this.latOri);
+    //console.log(this.lngOri);
+    //console.log(this.latDest);
+    //console.log(this.lngDest);
+    //console.log(this.lugar);
+
+    console.log(global.melodia);
+    console.log(global.volumen);
+    console.log(global.repeticionAlarm);
+    console.log(global.rango);
 
    }
 
@@ -79,6 +87,8 @@ export class AlarmaPage implements OnInit
     var x = await this.getLocation();
     this.getDistancia(x.lat,x.lng,this.latDest,this.lngDest);
     var porcentaje=(localStorage['distanciaTotal'] - localStorage['distanciaNum']) / localStorage['distanciaTotal'];
+    console.log("Distancia Inicial"+localStorage['distanciaTotal']);
+    console.log("Distancia Actual"+localStorage['distanciaNum']);
     if(porcentaje<0)
     {
       this.passedVar=0;
@@ -89,9 +99,12 @@ export class AlarmaPage implements OnInit
       this.passedVar=porcentaje;
     }
     
-    if (porcentaje>0.8)
-    {this.audio.play();}
+    if (this.passedVar>0.8)
+    {
+      this.audio.play();
+    }
     
+    console.log(this.passedVar);
     
         
   }
