@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class FavoritosPage implements OnInit {
 
   public cardItems = [];
+  public anyFav = false;
 
   favs: Observable<Favorito[]>;
   prueba: Observable<Favorito[]>;
@@ -24,17 +25,24 @@ export class FavoritosPage implements OnInit {
 
   ) {}
 
-  ngOnInit() {    
+  ngOnInit() {
 
-    this.favs = this.FavoritosService.getFavorites();
+    try {
+      this.favs = this.FavoritosService.getFavorites();
+      this.favs.forEach(element => {
+        element.forEach(item => {
+          var obj: { title: string, value: number} =
+          { title: item.id, value: item.value };
+          this.cardItems.push(obj);
+          this.anyFav = true;
+        })
+      });
 
-    this.favs.forEach(element => {
-      element.forEach(item => {
-        var obj: { title: string, value: number} =
-        { title: item.id, value: item.value };
-        this.cardItems.push(obj);
-      })
-    });
+    } catch (error) {
+      this.anyFav = false;
+    }
+
+
 
   }
 
@@ -63,7 +71,7 @@ export class FavoritosPage implements OnInit {
               })
             });
 
-            location.reload();
+            this.navCtrl.navigateForward('/menu-principal/otro/0');
           }
         }
       ]
@@ -84,8 +92,8 @@ export class FavoritosPage implements OnInit {
 
   pushAlarm(favTitle, valor) {
     this.cardItems = [];
+    this.navCtrl.navigateForward('/menu-principal/favorito' + '/' + favTitle);
     this.FavoritosService.updateFavorite(favTitle, valor);
-    this.navCtrl.navigateForward('/menu-principal/favorito' + '/' + 'UVG');
   }
 
 }

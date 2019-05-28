@@ -25,14 +25,11 @@ export class FavoritosService {
   private cardItems = [];
 
   constructor(
-    private global: GlobalService, 
+    private global: GlobalService,
     private db: AngularFirestore
   ) {
-    // console.log("Constructor de favoritos");
-    // this.global.idDoc = 'UiOkZnIhayc9mny1APs8';
 
-    // this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
-    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -45,7 +42,7 @@ export class FavoritosService {
   }
 
   getFavorites() {
-    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -59,7 +56,7 @@ export class FavoritosService {
   }
 
   getFav(id:string): Observable<Favorito> {
-    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
     return this.favCollection.doc<Favorito>(id).valueChanges().pipe(
       take(1),
       map(favorito => {
@@ -70,7 +67,7 @@ export class FavoritosService {
   }
 
   removeFavorite(id): Promise<void> {
-    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
 
     console.log("Se ejecutó el método para eliminar", id);
     return this.favCollection.doc(id).delete();
@@ -81,7 +78,7 @@ export class FavoritosService {
   }
 
   checkExistence (docID: string){
-    this.favCollection = this.db.collection<Favorito>('persona').doc('wovwjQF60BScD5kcIBHp').collection('favoritos');
+    this.favCollection = this.db.collection<Favorito>('persona').doc(this.global.idDoc).collection('favoritos');
     this.favoritos = this.favCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

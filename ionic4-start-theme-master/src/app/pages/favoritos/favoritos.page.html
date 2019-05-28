@@ -20,7 +20,20 @@
 
     <br>
 
-    <div id="fav-cards">
+    <div id="no-hay" *ngIf="!anyFav">
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>No hay favoritos</ion-card-title>
+                <ion-card-subtitle>Usted no tiene favoritos agregados :(</ion-card-subtitle>
+            </ion-card-header>
+        </ion-card>
+
+        <br>
+
+    </div>
+
+    <div id="fav-cards" *ngIf="anyFav">
 
         <ion-card *ngFor="let item of cardItems; let i = index">
             <ion-card-header>

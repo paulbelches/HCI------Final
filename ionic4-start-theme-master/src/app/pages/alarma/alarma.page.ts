@@ -36,6 +36,10 @@ export class AlarmaPage implements OnInit
 
   passedVar=null;
 
+  varControl = true;
+
+
+
   newFavorito : Favorito;
 
   constructor(
@@ -112,12 +116,17 @@ export class AlarmaPage implements OnInit
   timerTick()
    {
      
-    setTimeout( () => {
-      this.tiempo=localStorage['tiempo'];
-      this.distancia=localStorage['distancia'];
-      this.getPorcentaje();
-      this.timerTick();
-    }, 1000);
+
+    if (this.varControl){
+      setTimeout( () => {
+        this.tiempo=localStorage['tiempo'];
+        this.distancia=localStorage['distancia'];
+        this.getPorcentaje();
+        this.timerTick();
+      }, 1000);
+    } else {
+      console.log("Adios");
+    }
    }
 
    guardarInfo(parametro)
@@ -196,6 +205,7 @@ export class AlarmaPage implements OnInit
   {
     this.timerTick();
     this.existsInFirebase();
+    this.varControl = true;
   }
 
   checkExistence(){
@@ -272,6 +282,10 @@ export class AlarmaPage implements OnInit
         }
       })
     });
+  }
+
+  ionViewDidLeave() {
+    this.varControl = false;
   }
 
 }

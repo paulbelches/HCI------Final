@@ -68,6 +68,7 @@ export class MenuPrincipalPage implements OnInit {
           })
         }
       );
+      /*
       this.confs = this.confService.getConfs();
       this.confs.subscribe(
         element => {
@@ -82,7 +83,7 @@ export class MenuPrincipalPage implements OnInit {
           })
         }
       );
-      
+      */
   }
 
   saveName(nombre: string, id: string){
