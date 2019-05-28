@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
     melodia: 1,
     rango: 1,
     repeticionAlarm: false,
-    volumen: 50,
+    volumen: 0.1,
   }
   userId = null;
 

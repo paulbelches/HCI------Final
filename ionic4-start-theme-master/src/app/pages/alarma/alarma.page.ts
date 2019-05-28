@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, NavController } from '@ionic/angular';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult, } from '@ionic-native/native-geocoder/ngx';
 import { ToastController, AlertController } from '@ionic/angular';
 import { Favorito, FavoritosService } from 'src/app/services/favoritos.service';
 import { AlarmaPageModule } from './alarma.module';
@@ -32,14 +32,11 @@ export class AlarmaPage implements OnInit
   distancia=null;
   audio=null;
   rango=null;
-  
+  varControl = null;
   controlFav=true;
+  controlVentanaPararAlarma=null;
 
   passedVar=null;
-
-  varControl = true;
-
-
 
   newFavorito : Favorito;
 
@@ -118,28 +115,50 @@ export class AlarmaPage implements OnInit
     
     if (localStorage['distanciaNum']<=this.rango)
     {
-      this.audio.play();
+      if(this.controlVentanaPararAlarma)
+      {
+        this.audio.play();
+        this.error();
+        this.controlVentanaPararAlarma=false;
+      }
+      
+      
     }
     
     console.log(this.passedVar);
     
         
   }
+
+  async error() {
+    const alert = await this.alertController.create({
+      header: 'ALARMA',
+      message: '¿Desea detener la alarma?',
+      buttons: [
+        {
+          text: 'Confirmar',
+          handler: async data => {
+            this.audio.pause();
+            this.varControl = false;
+            this.navCtrl.navigateForward('/menu-principal/otro/0');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+}
   
   timerTick()
    {
-     
-    if (this.varControl){
-      setTimeout( () => {
-        this.tiempo=localStorage['tiempo'];
-        this.distancia=localStorage['distancia'];
-        this.getPorcentaje();
-        this.timerTick();
-      }, 1000);
-    } else {
-      console.log("Adios");
-    }
-
+    if(this.varControl)
+    { 
+    setTimeout( () => {
+      this.tiempo=localStorage['tiempo'];
+      this.distancia=localStorage['distancia'];
+      this.getPorcentaje();
+      this.timerTick();
+    }, 2000);}
    }
 
    guardarInfo(parametro)
@@ -216,9 +235,11 @@ export class AlarmaPage implements OnInit
 
   ngOnInit()
   {
+    this.varControl = true;
     this.timerTick();
     this.existsInFirebase();
-    this.varControl = true;
+    this.controlVentanaPararAlarma=true;
+    
   }
 
   checkExistence(){
@@ -295,10 +316,6 @@ export class AlarmaPage implements OnInit
         }
       })
     });
-  }
-
-  ionViewDidLeave() {
-    this.varControl = false;
   }
 
 }

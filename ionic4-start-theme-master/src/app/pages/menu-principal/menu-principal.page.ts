@@ -68,7 +68,6 @@ export class MenuPrincipalPage implements OnInit {
           })
         }
       );
-      /*
       this.confs = this.confService.getConfs();
       this.confs.subscribe(
         element => {
@@ -83,7 +82,7 @@ export class MenuPrincipalPage implements OnInit {
           })
         }
       );
-      */
+      
   }
 
   saveName(nombre: string, id: string){
@@ -96,14 +95,13 @@ export class MenuPrincipalPage implements OnInit {
     
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
-    
+    this.loadMap();
     
     this.tipo = this.activateRoute.snapshot.paramMap.get('tipo');
   }
 
   ionViewWillEnter() {
-    this.menuCtrl.enable(true);   
-    this.loadMap();
+    this.menuCtrl.enable(true);    
   }
 
   async loadMap(){

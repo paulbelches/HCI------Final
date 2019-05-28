@@ -41,7 +41,7 @@ export class SettingsPage implements OnInit {
     melodia: 1,
     rango: 2,
     repeticionAlarm: false,
-    volumen: 40
+    volumen: 0.1
   }
 
   constructor(public navCtrl: NavController,

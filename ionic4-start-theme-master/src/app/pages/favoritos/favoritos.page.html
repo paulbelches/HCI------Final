@@ -1,62 +1,62 @@
 <ion-header class="bg-primary">
-    <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-        <ion-title>
-            <ion-text color="light">
-                <ion-text color="light" class="fw700">Favoritos</ion-text>
-            </ion-text>
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <div class="ion-text-center">
-        <h1 margin-bottom>
-            <ion-text color="primary"><strong>Destinos Favoritos</strong></ion-text>
-        </h1>
-    </div>
-
-    <br>
-
-    <div id="no-hay" *ngIf="!anyFav">
-
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title>No hay favoritos</ion-card-title>
-                <ion-card-subtitle>Usted no tiene favoritos agregados :(</ion-card-subtitle>
-            </ion-card-header>
-        </ion-card>
-
+        <ion-toolbar color="primary">
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title>
+                <ion-text color="light">
+                    <ion-text color="light" class="fw700">Favoritos</ion-text>
+                </ion-text>
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    
+    <ion-content>
+        <div class="ion-text-center">
+            <h1 margin-bottom>
+                <ion-text color="primary"><strong>Destinos Favoritos</strong></ion-text>
+            </h1>
+        </div>
+    
         <br>
-
-    </div>
-
-    <div id="fav-cards" *ngIf="anyFav">
-
-        <ion-card *ngFor="let item of cardItems; let i = index">
-            <ion-card-header>
-                <ion-card-title>{{item.title}}</ion-card-title>
-                <ion-card-subtitle>Utilizado: {{item.value}} veces</ion-card-subtitle>
-            </ion-card-header>
-
-            <div class="card-buttons" id="{{'card-'+i}}">
-                <ion-card-content>
-                    <ion-button (click)="pushAlarm(item.title, item.value)">
-                        <ion-icon slot="start" name="alarm"></ion-icon>
-                        Activar
-                    </ion-button>
-                    <ion-button (click)="removeFavorite(item.title)">
-                        <ion-icon slot="start" name="trash"></ion-icon>
-                        Eliminar
-                    </ion-button>
-                </ion-card-content>
-            </div>
-        </ion-card>
-
-        <br>
-
-    </div>
-
-</ion-content>
+    
+        <div id="no-hay" *ngIf="!anyFav">
+    
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title>No hay favoritos</ion-card-title>
+                    <ion-card-subtitle>Usted no tiene favoritos agregados :(</ion-card-subtitle>
+                </ion-card-header>
+            </ion-card>
+    
+            <br>
+    
+        </div>
+    
+        <div id="fav-cards" *ngIf="anyFav">
+    
+            <ion-card *ngFor="let item of cardItems; let i = index">
+                <ion-card-header>
+                    <ion-card-title>{{item.title}}</ion-card-title>
+                    <ion-card-subtitle>Utilizado: {{item.value}} veces</ion-card-subtitle>
+                </ion-card-header>
+    
+                <div class="card-buttons" id="{{'card-'+i}}">
+                    <ion-card-content>
+                        <ion-button (click)="pushAlarm(item.title, item.value)">
+                            <ion-icon slot="start" name="alarm"></ion-icon>
+                            Activar
+                        </ion-button>
+                        <ion-button (click)="removeFavorite(item.title)">
+                            <ion-icon slot="start" name="trash"></ion-icon>
+                            Eliminar
+                        </ion-button>
+                    </ion-card-content>
+                </div>
+            </ion-card>
+    
+            <br>
+    
+        </div>
+    
+    </ion-content>
