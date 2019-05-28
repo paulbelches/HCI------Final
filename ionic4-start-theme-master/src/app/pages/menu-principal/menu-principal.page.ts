@@ -95,13 +95,14 @@ export class MenuPrincipalPage implements OnInit {
     
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
-    this.loadMap();
+    
     
     this.tipo = this.activateRoute.snapshot.paramMap.get('tipo');
   }
 
   ionViewWillEnter() {
-    this.menuCtrl.enable(true);    
+    this.menuCtrl.enable(true);   
+    this.loadMap();
   }
 
   async loadMap(){

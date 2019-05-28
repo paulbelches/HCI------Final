@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionictheme.ionic4start" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Solars</name>
-    <description>Solars</description>
+    <name>GeoWakeUp</name>
+    <description>GeoWakeUp</description>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -11,6 +11,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyCeD2e5B19y1rQGFp6betx9hwILajEMT6M" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />

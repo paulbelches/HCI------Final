@@ -33,12 +33,6 @@ export class AppComponent {
         icon: 'globe'
       },
       {
-        title: 'NFC',
-        url: '/nfc',
-        direct: 'forward',
-        icon: 'wifi'
-      },
-      {
         title: 'Favoritos',
         url: '/favoritos',
         direct: 'forward',
