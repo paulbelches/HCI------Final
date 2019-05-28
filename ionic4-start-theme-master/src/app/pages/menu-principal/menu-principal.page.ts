@@ -135,6 +135,12 @@ export class MenuPrincipalPage implements OnInit {
       loading.dismiss();
       this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
 
+      if(this.tipo != 'otro'){
+        this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
+        console.log("El lugar es: " + this.lugar);
+        this.calculateAndDisplayRoute();
+      }
+
     });
   }
 
