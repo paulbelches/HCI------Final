@@ -95,24 +95,36 @@ export class MenuPrincipalPage implements OnInit {
     
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
-    this.loadMap();
+    
+    console.log("on init");
     
     this.tipo = this.activateRoute.snapshot.paramMap.get('tipo');
   }
 
   ionViewWillEnter() {
+    console.log("will enter");
     this.menuCtrl.enable(true);    
   }
 
-  async loadMap(){
-    this.myLatLng = await this.getLocation();
+  ionViewDidEnter(){
+    // directionsDisplay.setMap(null);
+    console.log("Did enter");
+    this.loadMap();
+  }
 
+  async loadMap(){
     const loading = await this.loadCtrl.create();
     loading.present();
 
+    this.lugar = '';
+    directionsDisplay.setDirections({routes: []});
+
+    this.myLatLng = await this.getLocation();
+    console.log(this.myLatLng);
+
     this.mapRef  = new google.maps.Map(document.getElementById('map'), {
       center: this.myLatLng,
-      zoom: 12,
+      zoom: 15,
       mapTypeId: 'terrain'
     });
 
@@ -123,11 +135,6 @@ export class MenuPrincipalPage implements OnInit {
       loading.dismiss();
       this.addMarker(this.myLatLng.lat, this.myLatLng.lng);
 
-      if(this.tipo != 'otro'){
-        this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
-        console.log("El lugar es: " + this.lugar);
-        this.calculateAndDisplayRoute();
-      }
     });
   }
 
@@ -227,10 +234,18 @@ export class MenuPrincipalPage implements OnInit {
     if(!fallo){
       this.deleteLastMarker();
       this.setUbicacion();
-      this.siguiente = true;
+
+      setTimeout( () => {
+        this.changeValue();
+      }, 1000);
+      
     }else{
       this.errorMensaje();
     }
+  }
+
+  private changeValue(){
+    this.siguiente = true;
   }
 
   pushPage(){
