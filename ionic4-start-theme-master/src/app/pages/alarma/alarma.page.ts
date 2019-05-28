@@ -31,6 +31,7 @@ export class AlarmaPage implements OnInit
   tiempo=null;
   distancia=null;
   audio=null;
+  rango=null;
   
   controlFav=true;
 
@@ -61,7 +62,18 @@ export class AlarmaPage implements OnInit
     this.lugar = this.activateRoute.snapshot.paramMap.get('lugar');
     this.getTimeAndDist(this.latOri,this.lngOri,this.latDest,this.lngDest);
 
-    this.audio = new Audio('assets/sounds/alarma1.mp3');
+    if(global.melodia==1)
+    {
+      this.audio = new Audio('assets/sounds/alarma1.mp3');
+    }
+    else
+    {
+      this.audio = new Audio('assets/sounds/alarma2.mp3');
+    }
+
+    this.audio.volume=global.volumen;
+
+    
 
     //console.log(this.latOri);
     //console.log(this.lngOri);
@@ -73,6 +85,7 @@ export class AlarmaPage implements OnInit
     console.log(global.volumen);
     console.log(global.repeticionAlarm);
     console.log(global.rango);
+    this.rango=global.rango;
 
    }
 
@@ -103,7 +116,7 @@ export class AlarmaPage implements OnInit
       this.passedVar=porcentaje;
     }
     
-    if (this.passedVar>0.8)
+    if (localStorage['distanciaNum']<=this.rango)
     {
       this.audio.play();
     }
@@ -116,7 +129,6 @@ export class AlarmaPage implements OnInit
   timerTick()
    {
      
-
     if (this.varControl){
       setTimeout( () => {
         this.tiempo=localStorage['tiempo'];
@@ -127,6 +139,7 @@ export class AlarmaPage implements OnInit
     } else {
       console.log("Adios");
     }
+
    }
 
    guardarInfo(parametro)
