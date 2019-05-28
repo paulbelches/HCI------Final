@@ -110,7 +110,7 @@ export class SettingsPage implements OnInit {
   }
 
   update(){
-    if ((this.rango<1) || (this.rango>150)){
+    if ((this.rango<1) || (this.rango>10000)){
       this.error();
     } else {
       this.conf.rango = this.rango;
